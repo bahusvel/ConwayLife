@@ -11,6 +11,7 @@ import java.awt.event.*;
 /**
  * Created by denislavrov on 8/14/14.
  */
+
 @SuppressWarnings("ALL")
 public class MainWindow {
     private JPanel mainPanel;

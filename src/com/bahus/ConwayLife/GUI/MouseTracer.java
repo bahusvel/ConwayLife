@@ -26,6 +26,7 @@ public class MouseTracer {
         hasReset = false;
     }
 
+    /* Unused functions
     public Point getDelta(){
         return deltaPosition;
     }
@@ -33,6 +34,7 @@ public class MouseTracer {
     public Point getTotalDelta(){
         return new Point(totalDelta.x+deltaPosition.x, totalDelta.y+deltaPosition.y);
     }
+    */
 
     public int tdx(){
         return totalDelta.x+deltaPosition.x;

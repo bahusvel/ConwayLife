@@ -8,18 +8,16 @@ import java.awt.*;
  */
 public class Runner {
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                JFrame frame = new JFrame("Test");
-                MainWindow mw = new MainWindow();
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frame.add(mw.getMainPanel());
-                frame.setVisible(true);
-                frame.pack();
-                frame.setLocationRelativeTo(null);
+        // Runnable() replaced with lambda
+        EventQueue.invokeLater( () -> {
+            JFrame frame = new JFrame("Test");
+            MainWindow mw = new MainWindow();
+            frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            frame.add(mw.getMainPanel());
+            frame.setVisible(true);
+            frame.pack();
+            frame.setLocationRelativeTo(null);
 
-            }
         });
     }
 
