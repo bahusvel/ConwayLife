@@ -14,10 +14,10 @@ public class HashLife implements GenericLife{
 
     public boolean[][] getBoard(){
         bounds.updateBounds(cells);
-        boolean[][] ret = new boolean[(int)(bounds.hx - bounds.lx)+1][(int)(bounds.hy - bounds.ly)+1];
-        for (long y = bounds.ly; y <= bounds.hy; y++){
-            for (long x = bounds.lx; x <= bounds.hx; x++) {
-                ret[(int)(x - bounds.lx)][(int)(y-bounds.ly)] = cells.contains(x, y);
+        boolean[][] ret = new boolean[bounds.hx - bounds.lx +1][bounds.hy - bounds.ly +1];
+        for (int y = bounds.ly; y <= bounds.hy; y++){
+            for (int x = bounds.lx; x <= bounds.hx; x++) {
+                ret[(x - bounds.lx)][(y-bounds.ly)] = cells.contains(x, y);
             }
         }
         return ret;
@@ -37,8 +37,8 @@ public class HashLife implements GenericLife{
         bounds.updateBounds(cells);
         String ret = "";
         ret += (StringMultiply("+-", bounds.hx - bounds.lx) + "+\n");
-        for (long y = bounds.ly; y <= bounds.hy; y++){
-            for (long x = bounds.lx; x <= bounds.hx; x++){
+        for (int y = bounds.ly; y <= bounds.hy; y++){
+            for (int x = bounds.lx; x <= bounds.hx; x++){
                 ret += ("+" + (cells.contains(x, y) ? "X" : "0") + ((x == bounds.hx) ? "+" : ""));
             }
             ret += "\n";
@@ -47,14 +47,14 @@ public class HashLife implements GenericLife{
     return ret;
     }
 
-    public void toggleCell(long x, long y){
+    public void toggleCell(int x, int y){
         if (cells.contains(x,y)) cells.remove(x,y);
         else cells.add(new Point(x,y));
     }
 
-    public String StringMultiply(String str, long times){
+    public String StringMultiply(String str, int times){
         String ret = str;
-        for (long i = 0; i < times; i++){
+        for (int i = 0; i < times; i++){
             ret += str;
         }
     return ret;

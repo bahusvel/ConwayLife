@@ -1,22 +1,19 @@
 package com.bahus.ConwayLife.Core.Storage;
 
-import com.bahus.ConwayLife.Core.Storage.Point;
-import com.bahus.ConwayLife.Core.Storage.PointSet;
-
 /**
  * Created by denislavrov on 8/12/14.
  */
 public class Bounds {
-    public long lx;
-    public long ly;
-    public long hx;
-    public long hy;
+    public int lx;
+    public int ly;
+    public int hx;
+    public int hy;
 
     public Bounds() {
 
     }
 
-    public Bounds(long xmin, long ymin, long xmax, long ymax) {
+    public Bounds(int xmin, int ymin, int xmax, int ymax) {
         lx = xmin;
         ly = ymin;
         hx = xmax;
@@ -24,7 +21,7 @@ public class Bounds {
     }
 
     public void updateBounds(PointSet cells){
-        long xmin = 0, xmax = 0, ymin = 0, ymax = 0;
+        int xmin = 0, xmax = 0, ymin = 0, ymax = 0;
         boolean firstRun = true;
 
         for (Point p : cells){

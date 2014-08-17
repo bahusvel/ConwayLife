@@ -11,6 +11,7 @@ import java.awt.event.*;
 /**
  * Created by denislavrov on 8/14/14.
  */
+@SuppressWarnings("ALL")
 public class MainWindow {
     private JPanel mainPanel;
     private JButton nextGenerationButton;
@@ -23,8 +24,10 @@ public class MainWindow {
     private JCheckBox slowCheckBox;
     private JSpinner playNumber;
     private JProgressBar progressBar1;
+    private JCheckBox animateCheckBox;
     private boolean playPressed = false;
     private boolean slow = false;
+    private boolean animate = true;
     private int GRIDSIZE = 10;
     private BitLife nLife = new BitLife();
     private MouseTracer mt = new MouseTracer();
@@ -69,7 +72,6 @@ public class MainWindow {
                 Cursor cursor = Cursor.getPredefinedCursor(Cursor.HAND_CURSOR);
                 canvasPanel.setCursor(cursor);
                 canvasPanel.repaint();
-                //System.out.println(mt.getTotalDelta());
             }
 
         });
@@ -77,34 +79,38 @@ public class MainWindow {
 
 
         playButton.addActionListener(e -> {
-            playPressed = !playPressed;
-            int looptill = (Integer) playNumber.getValue();
-            Timer timer = new Timer(slow ? 100 : 0, new ActionListener() {
-                private int position;
+            if (!animate){
+                for (int i = 0; i < (Integer) playNumber.getValue(); i++) nLife.nextGen();
+                canvasPanel.repaint();
+            }
+            else {
+                playPressed = !playPressed;
+                int looptill = (Integer) playNumber.getValue();
+                Timer timer = new Timer(slow ? 100 : 0, new ActionListener() {
+                    private int position;
 
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    position++;
-                    nLife.nextGen();
-                    if ((position < looptill) && (playPressed)) {
-                        progressBar1.setValue(1+(int)((double)position*100.0/(double)looptill));
-                        canvasPanel.repaint();
-                    } else {
-                        ((Timer) e.getSource()).stop();
-                        System.gc();
-                        progressBar1.setValue(progressBar1.getMinimum());
-                        playPressed = false;
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        position++;
+                        nLife.nextGen();
+                        if ((position < looptill) && (playPressed)) {
+                            progressBar1.setValue(1 + (int) ((double) position * 100.0 / (double) looptill));
+                            canvasPanel.repaint();
+                        } else {
+                            ((Timer) e.getSource()).stop();
+                            System.gc();
+                            progressBar1.setValue(progressBar1.getMinimum());
+                            playPressed = false;
+                        }
                     }
-                }
-            });
-            timer.start();
-
+                });
+                timer.start();
+            }
     });
     nextGenerationButton.addActionListener(e -> {
         long stime = System.nanoTime();
         nLife.nextGen();
         System.out.printf("Generation took: %d micro seconds.\n", (System.nanoTime() - stime)/1000);
-        //System.out.println(nLife.getBounds());
         canvasPanel.repaint();
 
     });
@@ -115,9 +121,7 @@ public class MainWindow {
         canvasPanel.repaint();
         });
 
-        slowCheckBox.addActionListener(e -> {
-            slow = !slow;
-        });
+        slowCheckBox.addActionListener(e -> slow = !slow);
         zoomIn.addActionListener(e -> {
             GRIDSIZE++;
             canvasPanel.repaint();
@@ -126,6 +130,7 @@ public class MainWindow {
             GRIDSIZE--;
             canvasPanel.repaint();
         });
+        animateCheckBox.addActionListener(e -> animate = !animate);
     }
 
 
@@ -147,7 +152,7 @@ public class MainWindow {
                 super.paintComponent(g);
                 // going to draw grid here.
                 boolean[][] board = nLife.getBoard();
-                drawGrid(gg, new Bounds(0l,0l,
+                drawGrid(gg, new Bounds(0,0,
                         ((canvasPanel.getWidth()/GRIDSIZE) < board.length) ? board.length : (canvasPanel.getWidth()/GRIDSIZE),
                         ((canvasPanel.getHeight()/GRIDSIZE) < board[0].length) ? board[0].length : (canvasPanel.getHeight()/GRIDSIZE) ));
                 drawCells(gg, board);

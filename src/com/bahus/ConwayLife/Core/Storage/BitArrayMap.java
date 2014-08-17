@@ -8,7 +8,7 @@ import org.roaringbitmap.RoaringBitmap;
 /**
  * Created by denislavrov on 8/15/14.
  */
-public class BitArrayMap implements BitArray2D{
+public class BitArrayMap /*implements BitArray2D*/{
     private TIntObjectHashMap<RoaringBitmap> container = new TIntObjectHashMap<>();
 
     public BitArrayMap(){
@@ -26,28 +26,24 @@ public class BitArrayMap implements BitArray2D{
         else container.get(y).remove(x);
     }
 
-    public TIntObjectHashMap<RoaringBitmap> getContainer(){
-        return container;
-    }
-
-    public RoaringBitmap getY(int y){
+    RoaringBitmap getY(int y){
         if (!container.containsKey(y)) container.put(y, new RoaringBitmap());
         return container.get(y);
     }
 
-    public boolean[][] getBox(int xmin, int ymin, int xmax, int ymax){
-        boolean[][] ret = new boolean[xmax - xmin + 1][ymax - ymin + 1];
-        for (int y = 0; y < (ymax - ymin); y++){
-            for (int x : container.get(y).toArray()) ret[x][y] = true;
-        }
-        return ret;
+    public int[] yValues(){
+        return container.keys();
+    }
+
+    public int[] xValues(int y){
+        return getY(y).toArray();
     }
 
     public boolean[][] getBox(Bounds b){
-        boolean[][] ret = new boolean[(int)(b.hx - b.lx + 2)][(int)(b.hy - b.ly + 2)];
-        for (int y : container.keys()){
-            for (int x : getY(y).toArray()){
-                ret[(int)(x - b.lx)][(int)(y-b.ly)] = true;
+        boolean[][] ret = new boolean[b.hx - b.lx + 1][b.hy - b.ly + 1];
+        for (int y : yValues()){
+            for (int x : xValues(y)){
+                ret[(x - b.lx)][(y-b.ly)] = true;
             }
         }
         return ret;
@@ -56,12 +52,12 @@ public class BitArrayMap implements BitArray2D{
     public Bounds getBounds(){
         int ymin = 0, ymax = 0, xmin = 0, xmax = 0;
         boolean firstRun = true;
-        for (int y : container.keys()){
+        for (int y : yValues()){
             if (firstRun) ymin = y;
             if (y < ymin) ymin = y;
             if (y > ymax) ymax = y;
             //System.out.println(getY(y));
-            for (int x : getY(y).toArray()){
+            for (int x : xValues(y)){
                 if (firstRun){
                     xmin = x;
                     firstRun = false;
@@ -75,8 +71,7 @@ public class BitArrayMap implements BitArray2D{
 
     public int size(){
         int size = 0;
-        for (int i : container.keys()) size += getY(i).getCardinality();
-        //System.out.println(size);
+        for (int i : yValues()) size += getY(i).getCardinality();
         return size;
     }
 
@@ -85,29 +80,31 @@ public class BitArrayMap implements BitArray2D{
     }
 
     public void addAll(BitArrayMap b2){
-        for (int y : b2.getContainer().keys()){
-            for (int x : b2.getY(y).toArray()){
+        for (int y : b2.yValues()){
+            for (int x : b2.xValues(y)){
                 set(x, y, true);
             }
         }
     }
 
     public void removeAll(BitArrayMap b2){
-        for (int y : b2.getContainer().keys()){
-            for (int x : b2.getY(y).toArray()){
+        for (int y : b2.yValues()){
+            for (int x : b2.xValues(y)){
                 if (get(x, y)) set(x, y, false);
             }
         }
     }
 
+    /* Unused function
     public void retainAll(BitArrayMap b2){
-        for (int y : container.keys()){
-            for (int x : getY(y).toArray()){
+        for (int y : yValues()){
+            for (int x : xValues(y)){
                 if (!b2.get(x,y)) set(x, y, false);
             }
         }
     }
-
+    */
+    /* Testing purposes only
     public static void main(String[] args){
         RoaringBitmap r1 = new RoaringBitmap();
         RoaringBitmap r2 = new RoaringBitmap();
@@ -125,4 +122,5 @@ public class BitArrayMap implements BitArray2D{
 
 
     }
+    */
 }

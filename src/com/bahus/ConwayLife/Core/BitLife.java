@@ -11,8 +11,8 @@ public class BitLife implements GenericLife {
     private BitArrayMap cells = new BitArrayMap();
 
 
-
-    private BitArrayMap getPerimeter(int x, int y){
+    /* Unused function
+    private static BitArrayMap getPerimeter(int x, int y){
         BitArrayMap retPer = new BitArrayMap();
         // add point itself
         retPer.set(x, y, true);
@@ -27,18 +27,17 @@ public class BitLife implements GenericLife {
         retPer.set(x+1,y+1, true);
         return retPer;
     }
+    */
 
     @Override
     public boolean[][] getBoard() {
         bounds.updateBounds(cells.getBounds());
-        //System.out.println(cells.getBounds());
         return cells.getBox(bounds);
     }
 
     @Override
     public Bounds getBounds() {
         bounds.updateBounds(cells.getBounds());
-        //System.out.println(cells.getBounds());
         return bounds;
     }
 
@@ -48,25 +47,36 @@ public class BitLife implements GenericLife {
     }
 
     @Override
-    public void toggleCell(long x, long y) {
-        if (cells.get((int)x, (int)y)) cells.set( (int)x, (int)y, false);
-        else cells.set((int)x, (int)y, true);
+    public void toggleCell(int x, int y) {
+        if (cells.get(x, y)) cells.set(x, y, false);
+        else cells.set(x, y, true);
 
     }
 
     @Override
     public void nextGen() {
         BitArrayMap gen = new BitArrayMap();
-        for(int y : cells.getContainer().keys()){
-            for (int x : cells.getY(y).toArray()){
-                gen.addAll(getPerimeter(x,y));
+        for(int y : cells.yValues()){
+            for (int x : cells.xValues(y)){
+                gen.set(x, y, true);
+                // set the perimeter
+                gen.set(x-1,y-1, true);
+                gen.set(x-1,y, true);
+                gen.set(x-1,y+1, true);
+                gen.set(x  ,y-1, true);
+                gen.set(x  ,y+1, true);
+                gen.set(x+1,y-1, true);
+                gen.set(x+1, y, true);
+                gen.set(x+1,y+1, true);
             }
         }
+
         BitArrayMap add = new BitArrayMap();
         BitArrayMap sub = new BitArrayMap();
-        for(int y : gen.getContainer().keys()) {
-            for (int x : gen.getY(y).toArray()) {
-                int isize = 0;
+        for(int y : gen.yValues()) {
+            for (int x : gen.xValues(y)) {
+                byte isize = 0;
+
                 if (cells.get(x, y)) isize++;
                 if (cells.get(x-1,y-1)) isize++;
                 if (cells.get(x-1,y)) isize++;

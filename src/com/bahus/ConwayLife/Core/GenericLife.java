@@ -9,6 +9,6 @@ public interface GenericLife {
     public boolean[][] getBoard();
     public Bounds getBounds();
     public void reset();
-    public void toggleCell(long x, long y);
+    public void toggleCell(int x, int y);
     public void nextGen();
 }
