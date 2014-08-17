@@ -6,5 +6,13 @@ package com.bahus.ConwayLife.Core.Storage;
 public interface BitArray2D {
     public boolean get(int x, int y);
     public void set(int x, int y, boolean val);
-    public boolean[][] getBox(int xmin, int ymin, int xmax, int ymax);
+    public int[] yValues();
+    public int[] xValues(int y);
+    public Bounds getBounds();
+    public int size();
+    public void clear();
+    public void addAll(BitArray2D b2);
+    public void removeAll(BitArray2D b2);
+
+
 }

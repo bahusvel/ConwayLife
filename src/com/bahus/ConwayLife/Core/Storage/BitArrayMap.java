@@ -8,7 +8,7 @@ import org.roaringbitmap.RoaringBitmap;
 /**
  * Created by denislavrov on 8/15/14.
  */
-public class BitArrayMap /*implements BitArray2D*/{
+public class BitArrayMap implements BitArray2D{
     private TIntObjectHashMap<RoaringBitmap> container = new TIntObjectHashMap<>();
 
     public BitArrayMap(){
@@ -26,7 +26,7 @@ public class BitArrayMap /*implements BitArray2D*/{
         else container.get(y).remove(x);
     }
 
-    RoaringBitmap getY(int y){
+    private RoaringBitmap getY(int y){
         if (!container.containsKey(y)) container.put(y, new RoaringBitmap());
         return container.get(y);
     }
@@ -37,16 +37,6 @@ public class BitArrayMap /*implements BitArray2D*/{
 
     public int[] xValues(int y){
         return getY(y).toArray();
-    }
-
-    public boolean[][] getBox(Bounds b){
-        boolean[][] ret = new boolean[b.hx - b.lx + 1][b.hy - b.ly + 1];
-        for (int y : yValues()){
-            for (int x : xValues(y)){
-                ret[(x - b.lx)][(y-b.ly)] = true;
-            }
-        }
-        return ret;
     }
 
     public Bounds getBounds(){
@@ -79,7 +69,7 @@ public class BitArrayMap /*implements BitArray2D*/{
         container = new TIntObjectHashMap<>();
     }
 
-    public void addAll(BitArrayMap b2){
+    public void addAll(BitArray2D b2){
         for (int y : b2.yValues()){
             for (int x : b2.xValues(y)){
                 set(x, y, true);
@@ -87,7 +77,7 @@ public class BitArrayMap /*implements BitArray2D*/{
         }
     }
 
-    public void removeAll(BitArrayMap b2){
+    public void removeAll(BitArray2D b2){
         for (int y : b2.yValues()){
             for (int x : b2.xValues(y)){
                 if (get(x, y)) set(x, y, false);

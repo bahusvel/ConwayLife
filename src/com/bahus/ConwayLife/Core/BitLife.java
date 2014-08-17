@@ -8,7 +8,7 @@ import com.bahus.ConwayLife.Core.Storage.*;
 
 public class BitLife implements GenericLife {
     private Bounds bounds = new Bounds();
-    private BitArrayMap cells = new BitArrayMap();
+    private BitArray2D cells = new BitArrayMap();
 
 
     /* Unused function
@@ -29,10 +29,9 @@ public class BitLife implements GenericLife {
     }
     */
 
-    @Override
-    public boolean[][] getBoard() {
-        bounds.updateBounds(cells.getBounds());
-        return cells.getBox(bounds);
+
+    public BitArray2D getCells(){
+        return cells;
     }
 
     @Override
@@ -55,7 +54,7 @@ public class BitLife implements GenericLife {
 
     @Override
     public void nextGen() {
-        BitArrayMap gen = new BitArrayMap();
+        BitArray2D gen = new BitArrayMap();
         for(int y : cells.yValues()){
             for (int x : cells.xValues(y)){
                 gen.set(x, y, true);
@@ -71,8 +70,8 @@ public class BitLife implements GenericLife {
             }
         }
 
-        BitArrayMap add = new BitArrayMap();
-        BitArrayMap sub = new BitArrayMap();
+        BitArray2D add = new BitArrayMap();
+        BitArray2D sub = new BitArrayMap();
         for(int y : gen.yValues()) {
             for (int x : gen.xValues(y)) {
                 byte isize = 0;

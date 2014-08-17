@@ -15,7 +15,7 @@ public class TestingStorage {
     }
 
     public static void main(String[] args){
-        BitArrayMap bar = new BitArrayMap();
+        BitArray2D bar = new BitArrayMap();
         Scanner s = new Scanner(System.in);
         s.nextLine();
         long stime = System.nanoTime();

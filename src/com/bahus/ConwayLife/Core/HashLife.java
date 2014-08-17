@@ -8,7 +8,7 @@ import com.bahus.ConwayLife.Core.Storage.PointSet;
 /**
  * Created by denislavrov on 8/12/14.
  */
-public class HashLife implements GenericLife{
+public class HashLife /*implements GenericLife*/{
     private Bounds bounds = new Bounds();
     private PointSet cells = new PointSet();
 

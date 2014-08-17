@@ -1,8 +1,9 @@
 package com.bahus.ConwayLife.GUI;
 
 import com.bahus.ConwayLife.Core.BitLife;
+import com.bahus.ConwayLife.Core.GenericLife;
+import com.bahus.ConwayLife.Core.Storage.BitArray2D;
 import com.bahus.ConwayLife.Core.Storage.Bounds;
-import com.bahus.ConwayLife.Core.HashLife;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,9 +31,8 @@ public class MainWindow {
     private boolean slow = false;
     private boolean animate = true;
     private int GRIDSIZE = 10;
-    private BitLife nLife = new BitLife();
+    private GenericLife nLife = new BitLife();
     private MouseTracer mt = new MouseTracer();
-    //private HashLife nLife = new HashLife();
 
     public MainWindow() {
         nLife.toggleCell(1,1);
@@ -111,7 +111,7 @@ public class MainWindow {
     nextGenerationButton.addActionListener(e -> {
         long stime = System.nanoTime();
         nLife.nextGen();
-        System.out.printf("Generation took: %d micro seconds.\n", (System.nanoTime() - stime)/1000);
+        System.out.printf("Generation took %d micro seconds.\n", (System.nanoTime() - stime)/1000);
         canvasPanel.repaint();
 
     });
@@ -152,16 +152,20 @@ public class MainWindow {
                 Graphics2D gg = (Graphics2D) g;
                 super.paintComponent(g);
                 // going to draw grid here.
-                boolean[][] board = nLife.getBoard();
-                drawGrid(gg, new Bounds(0,0,
-                        ((canvasPanel.getWidth()/GRIDSIZE) < board.length) ? board.length : (canvasPanel.getWidth()/GRIDSIZE),
-                        ((canvasPanel.getHeight()/GRIDSIZE) < board[0].length) ? board[0].length : (canvasPanel.getHeight()/GRIDSIZE) ));
-                drawCells(gg, board);
+                drawGrid(gg);
+                drawCells(gg, nLife.getCells(), nLife.getBounds());
             }
         };
     }
 
-    private void drawGrid(Graphics2D g, Bounds bounds){
+    private void drawGrid(Graphics2D g){
+        Bounds cellBounds = nLife.getBounds();
+        //initializing grid size and position
+        Bounds bounds = new Bounds(0,0,
+                ((canvasPanel.getWidth()/GRIDSIZE) < (cellBounds.hx - cellBounds.lx)) ? (cellBounds.hx - cellBounds.lx) : (canvasPanel.getWidth()/GRIDSIZE),
+                ((canvasPanel.getHeight()/GRIDSIZE) < (cellBounds.hy - cellBounds.ly)) ? (cellBounds.hy - cellBounds.ly) : (canvasPanel.getHeight()/GRIDSIZE)
+        );
+
         for (int x = 0; x < (bounds.hx - bounds.lx) + 2 ; x++ ) g.drawLine(
                 x*GRIDSIZE - mt.tdx(),
                 -mt.tdy(),
@@ -175,12 +179,13 @@ public class MainWindow {
                 y*GRIDSIZE - mt.tdy()
         );
     }
-    private void drawCells(Graphics2D g, boolean[][] cells){
+
+    private void drawCells(Graphics2D g, BitArray2D b, Bounds bounds){
         Rectangle cRect = new Rectangle();
-        for (int x = 0; x < cells.length; x++){
-            for (int y = 0; y < cells[0].length; y++) {
-                if(cells[x][y]){
-                    cRect.setBounds(x*GRIDSIZE - mt.tdx(),y*GRIDSIZE - mt.tdy(),GRIDSIZE,GRIDSIZE);
+        for (int y : b.yValues()){
+            for (int x : b.xValues(y)) {
+                if(b.get(x,y)){
+                    cRect.setBounds((x-bounds.lx)*GRIDSIZE - mt.tdx(),(y-bounds.ly)*GRIDSIZE - mt.tdy(),GRIDSIZE,GRIDSIZE);
                     g.fill(cRect);
                 }
             }
