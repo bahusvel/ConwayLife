@@ -66,9 +66,18 @@ public class BitLife implements GenericLife {
         BitArrayMap sub = new BitArrayMap();
         for(int y : gen.getContainer().keys()) {
             for (int x : gen.getY(y).toArray()) {
-                BitArrayMap intersect = getPerimeter(x, y);
-                intersect.retainAll(cells);
-                switch (intersect.size()) {
+                int isize = 0;
+                if (cells.get(x, y)) isize++;
+                if (cells.get(x-1,y-1)) isize++;
+                if (cells.get(x-1,y)) isize++;
+                if (cells.get(x-1,y+1)) isize++;
+                if (cells.get(x  ,y-1)) isize++;
+                if (cells.get(x  ,y+1)) isize++;
+                if (cells.get(x+1,y-1)) isize++;
+                if (cells.get(x+1, y)) isize++;
+                if (cells.get(x+1,y+1)) isize++;
+
+                switch (isize) {
                     case 3:
                         add.set(x, y, true);
                         break;
@@ -87,4 +96,5 @@ public class BitLife implements GenericLife {
         cells.removeAll(sub);
 
     }
+
 }

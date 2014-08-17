@@ -91,6 +91,7 @@ public class MainWindow {
                         canvasPanel.repaint();
                     } else {
                         ((Timer) e.getSource()).stop();
+                        System.gc();
                         progressBar1.setValue(progressBar1.getMinimum());
                         playPressed = false;
                     }
@@ -169,9 +170,13 @@ public class MainWindow {
         );
     }
     private void drawCells(Graphics2D g, boolean[][] cells){
+        Rectangle cRect = new Rectangle();
         for (int x = 0; x < cells.length; x++){
             for (int y = 0; y < cells[0].length; y++) {
-                if(cells[x][y]) g.fill(new Rectangle(x*GRIDSIZE - mt.tdx(),y*GRIDSIZE - mt.tdy(),GRIDSIZE,GRIDSIZE));
+                if(cells[x][y]){
+                    cRect.setBounds(x*GRIDSIZE - mt.tdx(),y*GRIDSIZE - mt.tdy(),GRIDSIZE,GRIDSIZE);
+                    g.fill(cRect);
+                }
             }
         }
 
