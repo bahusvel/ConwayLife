@@ -52,57 +52,41 @@ public class BitLife implements GenericLife {
 
     }
 
-    @Override
     public void nextGen() {
-        BitArray2D gen = new BitArrayMap();
+        WeightHashMap gen = new WeightHashMap(cells.getGrownBounds());
         for(int y : cells.yValues()){
             for (int x : cells.xValues(y)){
-                gen.set(x, y, true);
-                // set the perimeter
-                gen.set(x-1,y-1, true);
-                gen.set(x-1,y, true);
-                gen.set(x-1,y+1, true);
-                gen.set(x  ,y-1, true);
-                gen.set(x  ,y+1, true);
-                gen.set(x+1,y-1, true);
-                gen.set(x+1, y, true);
-                gen.set(x+1,y+1, true);
+                gen.inc(x, y);
+                gen.inc(x-1,y-1);
+                gen.inc(x-1,y);
+                gen.inc(x-1,y+1);
+                gen.inc(x  ,y-1);
+                gen.inc(x  ,y+1);
+                gen.inc(x+1,y-1);
+                gen.inc(x+1, y);
+                gen.inc(x+1,y+1);
             }
         }
 
-        BitArray2D add = new BitArrayMap();
-        BitArray2D sub = new BitArrayMap();
-        for(int y : gen.yValues()) {
-            for (int x : gen.xValues(y)) {
-                byte isize = 0;
+        for (long point : gen.keys()){
+            int x = gen.getX(point);
+            int y = gen.getY(point);
 
-                if (cells.get(x, y)) isize++;
-                if (cells.get(x-1,y-1)) isize++;
-                if (cells.get(x-1,y)) isize++;
-                if (cells.get(x-1,y+1)) isize++;
-                if (cells.get(x  ,y-1)) isize++;
-                if (cells.get(x  ,y+1)) isize++;
-                if (cells.get(x+1,y-1)) isize++;
-                if (cells.get(x+1, y)) isize++;
-                if (cells.get(x+1,y+1)) isize++;
-
-                switch (isize) {
-                    case 3:
-                        add.set(x, y, true);
-                        break;
-                    case 4:
-                        break;
-                    default:
-                        sub.set(x, y, true);
-                        break;
-                }
+            switch (gen.get(point)){
+                case 3:
+                    cells.set(x,y, true);
+                    break;
+                case 4:
+                    break;
+                default:
+                    cells.set(x,y, false);
+                    break;
 
             }
 
         }
 
-        cells.addAll(add);
-        cells.removeAll(sub);
+
 
     }
 

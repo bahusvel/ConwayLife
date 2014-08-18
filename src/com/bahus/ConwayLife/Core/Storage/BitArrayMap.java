@@ -59,6 +59,15 @@ public class BitArrayMap implements BitArray2D{
         return new Bounds(xmin, ymin, xmax, ymax);
     }
 
+    public Bounds getGrownBounds(){
+        Bounds bounds = getBounds();
+        bounds.hx++;
+        bounds.hy++;
+        bounds.lx--;
+        bounds.ly--;
+        return bounds;
+    }
+
     public int size(){
         int size = 0;
         for (int i : yValues()) size += getY(i).getCardinality();
@@ -83,6 +92,10 @@ public class BitArrayMap implements BitArray2D{
                 if (get(x, y)) set(x, y, false);
             }
         }
+    }
+
+    public String toString(){
+        return container.toString();
     }
 
     /* Unused function

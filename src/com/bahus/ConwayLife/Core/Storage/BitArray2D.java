@@ -9,6 +9,7 @@ public interface BitArray2D {
     public int[] yValues();
     public int[] xValues(int y);
     public Bounds getBounds();
+    public Bounds getGrownBounds();
     public int size();
     public void clear();
     public void addAll(BitArray2D b2);
