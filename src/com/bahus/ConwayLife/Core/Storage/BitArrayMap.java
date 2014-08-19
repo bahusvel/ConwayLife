@@ -60,11 +60,13 @@ public class BitArrayMap implements BitArray2D{
     }
 
     public Bounds getGrownBounds(){
+        //adjust this variable to reduce memory leakage
+        final int GROWSIZE = 200;
         Bounds bounds = getBounds();
-        bounds.hx++;
-        bounds.hy++;
-        bounds.lx--;
-        bounds.ly--;
+        bounds.hx += GROWSIZE;
+        bounds.hy += GROWSIZE;
+        bounds.lx -= GROWSIZE;
+        bounds.ly -= GROWSIZE;
         return bounds;
     }
 

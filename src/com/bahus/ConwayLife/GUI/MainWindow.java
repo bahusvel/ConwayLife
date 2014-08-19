@@ -53,7 +53,9 @@ public class MainWindow {
                 Point mouseLocation = e.getPoint();
                 nLife.toggleCell(nLife.getBounds().lx+((mouseLocation.x+mt.tdx())/GRIDSIZE), nLife.getBounds().ly+((mouseLocation.y+mt.tdy())/GRIDSIZE));
                 canvasPanel.repaint();
+
             }
+
 
             @Override
             public void mouseReleased(MouseEvent e) {
@@ -83,6 +85,7 @@ public class MainWindow {
             if (!animate){
                 for (int i = 0; i < (Integer) playNumber.getValue(); i++) nLife.nextGen();
                 canvasPanel.repaint();
+                System.gc();
             }
             else {
                 playPressed = !playPressed;
@@ -97,12 +100,18 @@ public class MainWindow {
                         if ((position < looptill) && (playPressed)) {
                             progressBar1.setValue(1 + (int) ((double) position * 100.0 / (double) looptill));
                             canvasPanel.repaint();
-                        } else {
+                            }
+                        else {
                             ((Timer) e.getSource()).stop();
                             System.gc();
                             progressBar1.setValue(progressBar1.getMinimum());
                             playPressed = false;
                         }
+                        /* Employ if system is memory leaking
+                        if(position%100 == 0){
+                            System.gc();
+                        }
+                        */
                     }
                 });
                 timer.start();

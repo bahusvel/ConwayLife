@@ -9,25 +9,8 @@ import com.bahus.ConwayLife.Core.Storage.*;
 public class BitLife implements GenericLife {
     private Bounds bounds = new Bounds();
     private BitArray2D cells = new BitArrayMap();
+    private WeightHashMap gen = new WeightHashMap(cells.getGrownBounds());
 
-
-    /* Unused function
-    private static BitArrayMap getPerimeter(int x, int y){
-        BitArrayMap retPer = new BitArrayMap();
-        // add point itself
-        retPer.set(x, y, true);
-        // set the perimeter
-        retPer.set(x-1,y-1, true);
-        retPer.set(x-1,y, true);
-        retPer.set(x-1,y+1, true);
-        retPer.set(x  ,y-1, true);
-        retPer.set(x  ,y+1, true);
-        retPer.set(x+1,y-1, true);
-        retPer.set(x+1, y, true);
-        retPer.set(x+1,y+1, true);
-        return retPer;
-    }
-    */
 
 
     public BitArray2D getCells(){
@@ -53,7 +36,10 @@ public class BitLife implements GenericLife {
     }
 
     public void nextGen() {
-        WeightHashMap gen = new WeightHashMap(cells.getGrownBounds());
+        if (gen.getBounds().smaller(cells.getBounds())){
+            gen = new WeightHashMap(cells.getGrownBounds());
+        }
+
         for(int y : cells.yValues()){
             for (int x : cells.xValues(y)){
                 gen.inc(x, y);
@@ -86,8 +72,7 @@ public class BitLife implements GenericLife {
 
         }
 
-
-
+    gen.clear();
     }
 
 }

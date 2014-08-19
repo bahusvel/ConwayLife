@@ -8,6 +8,11 @@ import gnu.trove.map.hash.TLongByteHashMap;
 public class WeightHashMap {
     private TLongByteHashMap container;
     public int width, height;
+
+    public Bounds getBounds() {
+        return bounds;
+    }
+
     private Bounds bounds;
 
     public WeightHashMap(Bounds bounds){
@@ -44,6 +49,10 @@ public class WeightHashMap {
 
     public String toString(){
         return container.toString();
+    }
+
+    public void clear(){
+        container.clear();
     }
 
     public static void main(String[] args){

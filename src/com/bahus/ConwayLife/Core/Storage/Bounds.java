@@ -48,6 +48,10 @@ public class Bounds {
         hy = b.hy;
     }
 
+    public boolean smaller(Bounds b){
+        return (hx <= b.hx) || (hy <= b.hy) || (ly >= b.ly) || (lx >= b.lx);
+    }
+
     public String toString(){
         return "Xmin: " + lx + " Xmax: " + hx + " Ymin: " + ly + " Ymax: " + hy;
     }
