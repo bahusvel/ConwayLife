@@ -35,6 +35,7 @@ public class BitLife implements GenericLife {
 
     }
 
+
     public void nextGen() {
 
         // before creating new gen container check if the existing one is capable to hold data

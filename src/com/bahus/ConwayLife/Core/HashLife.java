@@ -1,31 +1,20 @@
 package com.bahus.ConwayLife.Core;
 
 
-import com.bahus.ConwayLife.Core.Storage.Bounds;
-import com.bahus.ConwayLife.Core.Storage.Point;
-import com.bahus.ConwayLife.Core.Storage.PointSet;
+import com.bahus.ConwayLife.Core.Storage.*;
 
 /**
  * Created by denislavrov on 8/12/14.
  */
-public class HashLife /*implements GenericLife*/{
+public class HashLife implements GenericLife{
     private Bounds bounds = new Bounds();
-    private PointSet cells = new PointSet();
+    private BitArray2D cells = new PointSet();
+    private WeightHashMap gen = new WeightHashMap(cells.getGrownBounds());
 
-    public boolean[][] getBoard(){
-        bounds.updateBounds(cells);
-        boolean[][] ret = new boolean[bounds.hx - bounds.lx +1][bounds.hy - bounds.ly +1];
-        for (int y = bounds.ly; y <= bounds.hy; y++){
-            for (int x = bounds.lx; x <= bounds.hx; x++) {
-                ret[(x - bounds.lx)][(y-bounds.ly)] = cells.contains(x, y);
-            }
-        }
-        return ret;
-    }
 
     public Bounds getBounds(){
-        bounds.updateBounds(cells);
-        System.out.println(bounds);
+        bounds.updateBounds(cells.getBounds());
+        //System.out.println(bounds);
         return bounds;
     }
 
@@ -33,78 +22,57 @@ public class HashLife /*implements GenericLife*/{
         cells.clear();
     }
 
-    public String display(){
-        bounds.updateBounds(cells);
-        String ret = "";
-        ret += (StringMultiply("+-", bounds.hx - bounds.lx) + "+\n");
-        for (int y = bounds.ly; y <= bounds.hy; y++){
-            for (int x = bounds.lx; x <= bounds.hx; x++){
-                ret += ("+" + (cells.contains(x, y) ? "X" : "0") + ((x == bounds.hx) ? "+" : ""));
-            }
-            ret += "\n";
-            ret += (StringMultiply("+-", bounds.hx - bounds.lx) + "+\n");
-        }
-    return ret;
-    }
-
     public void toggleCell(int x, int y){
-        if (cells.contains(x,y)) cells.remove(x,y);
-        else cells.add(new Point(x,y));
+        if (cells.get(x,y)) cells.set(x,y, false);
+        else cells.set(x, y, true);
     }
 
-    public String StringMultiply(String str, int times){
-        String ret = str;
-        for (int i = 0; i < times; i++){
-            ret += str;
-        }
-    return ret;
-    }
 
     public void nextGen(){
-        PointSet gen = new PointSet();
-        for (Point p : cells){
-            // compute cell surroundings
-            // add them to common set
-            gen.addAll(getPerimeter(p));
-        }
-        // do the game of life computation
-        PointSet bufferadd = new PointSet();
-        PointSet buffersub = new PointSet();
-        for (Point p : gen){
-            PointSet intersect = getPerimeter(p);
-            intersect.retainAll(cells);
 
-            switch (intersect.size()){
+        // before creating new gen container check if the existing one is capable to hold data
+        if (gen.getBounds().smaller(cells.getBounds())){
+            gen = new WeightHashMap(cells.getGrownBounds());
+        }
+
+        for(int y : cells.yValues()){
+            for (int x : cells.xValues(y)){
+                gen.inc(x, y);
+                gen.inc(x-1,y-1);
+                gen.inc(x-1,y);
+                gen.inc(x-1,y+1);
+                gen.inc(x  ,y-1);
+                gen.inc(x  ,y+1);
+                gen.inc(x+1,y-1);
+                gen.inc(x+1, y);
+                gen.inc(x+1,y+1);
+            }
+        }
+
+        for (long point : gen.keys()){
+            int x = gen.getX(point);
+            int y = gen.getY(point);
+
+            switch (gen.get(point)){
                 case 3:
-                    bufferadd.add(p);
+                    cells.set(x,y, true);
                     break;
                 case 4:
                     break;
                 default:
-                    buffersub.add(p);
+                    cells.set(x,y, false);
+                    break;
+
             }
 
         }
-        cells.addAll(bufferadd);
-        cells.removeAll(buffersub);
+        // clear the generated data
+        gen.clear();
     }
 
-    private PointSet getPerimeter(Point p){
-        PointSet retPer = new PointSet();
-        // add point itself
-        retPer.add(p);
-        // add the perimeter
-        retPer.add(new Point(p,-1,-1));
-        retPer.add(new Point(p,-1, 0));
-        retPer.add(new Point(p,-1, 1));
-        retPer.add(new Point(p, 0,-1));
-        retPer.add(new Point(p, 0, 1));
-        retPer.add(new Point(p, 1,-1));
-        retPer.add(new Point(p, 1, 0));
-        retPer.add(new Point(p, 1, 1));
-        return retPer;
+    @Override
+    public BitArray2D getCells() {
+        return cells;
     }
-
-
 
 }

@@ -2,6 +2,7 @@ package com.bahus.ConwayLife.GUI;
 
 import com.bahus.ConwayLife.Core.BitLife;
 import com.bahus.ConwayLife.Core.GenericLife;
+import com.bahus.ConwayLife.Core.HashLife;
 import com.bahus.ConwayLife.Core.Storage.BitArray2D;
 import com.bahus.ConwayLife.Core.Storage.Bounds;
 
@@ -33,6 +34,7 @@ public class MainWindow {
     private boolean animate = true;
     private int GRIDSIZE = 10;
     private GenericLife nLife = new BitLife();
+    //private GenericLife nLife = new HashLife();
     private MouseTracer mt = new MouseTracer();
 
     public MainWindow() {
@@ -108,11 +110,6 @@ public class MainWindow {
                             progressBar1.setValue(progressBar1.getMinimum());
                             playPressed = false;
                         }
-                        /* Employ if system is memory leaking
-                        if(position%100 == 0){
-                            System.gc();
-                        }
-                        */
                     }
                 });
                 timer.start();

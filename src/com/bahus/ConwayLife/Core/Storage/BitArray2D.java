@@ -12,8 +12,8 @@ public interface BitArray2D {
     public Bounds getGrownBounds();
     public int size();
     public void clear();
-    public void addAll(BitArray2D b2);
-    public void removeAll(BitArray2D b2);
+    //public void addAll(BitArray2D b2);
+    //public void removeAll(BitArray2D b2);
 
 
 }
