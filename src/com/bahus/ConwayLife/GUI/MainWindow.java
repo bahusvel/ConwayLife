@@ -27,6 +27,7 @@ public class MainWindow {
     private JSpinner playNumber;
     private JProgressBar progressBar1;
     private JCheckBox animateCheckBox;
+    private JTabbedPane tabbedPane1;
     private boolean playPressed = false;
     private boolean slow = false;
     private boolean animate = true;

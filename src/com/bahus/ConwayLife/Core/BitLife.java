@@ -36,6 +36,8 @@ public class BitLife implements GenericLife {
     }
 
     public void nextGen() {
+
+        // before creating new gen container check if the existing one is capable to hold data
         if (gen.getBounds().smaller(cells.getBounds())){
             gen = new WeightHashMap(cells.getGrownBounds());
         }
@@ -71,7 +73,7 @@ public class BitLife implements GenericLife {
             }
 
         }
-
+    // clear the generated data
     gen.clear();
     }
 

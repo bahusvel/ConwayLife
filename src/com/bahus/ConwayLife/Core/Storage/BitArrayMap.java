@@ -100,6 +100,7 @@ public class BitArrayMap implements BitArray2D{
         return container.toString();
     }
 
+
     /* Unused function
     public void retainAll(BitArrayMap b2){
         for (int y : yValues()){
