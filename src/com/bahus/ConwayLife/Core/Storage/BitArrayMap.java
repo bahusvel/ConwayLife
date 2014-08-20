@@ -74,7 +74,7 @@ public class BitArrayMap implements BitArray2D{
     }
 
     public void clear(){
-        container = new TIntObjectHashMap<>();
+        container.clear();
     }
 
     public String toString(){

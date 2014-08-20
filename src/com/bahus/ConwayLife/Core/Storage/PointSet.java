@@ -2,6 +2,7 @@ package com.bahus.ConwayLife.Core.Storage;
 
 import gnu.trove.list.array.TIntArrayList;
 import gnu.trove.set.hash.THashSet;
+import gnu.trove.set.hash.TIntHashSet;
 
 
 /**
@@ -90,7 +91,7 @@ public class PointSet extends THashSet<Point> implements BitArray2D{
 
     @Override
     public int[] yValues() {
-        TIntArrayList tmp = new TIntArrayList();
+        TIntHashSet tmp = new TIntHashSet();
         for (Point p : this){
             tmp.add(p.y);
         }
@@ -99,9 +100,9 @@ public class PointSet extends THashSet<Point> implements BitArray2D{
 
     @Override
     public int[] xValues(int y) {
-        TIntArrayList tmp = new TIntArrayList();
+        TIntHashSet tmp = new TIntHashSet();
         for (Point p : this){
-            tmp.add(p.x);
+            if (p.y == y) tmp.add(p.x);
         }
         return tmp.toArray();
     }

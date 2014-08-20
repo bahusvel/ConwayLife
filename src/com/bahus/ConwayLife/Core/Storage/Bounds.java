@@ -20,27 +20,6 @@ public class Bounds {
         hy = ymax;
     }
 
-    public void updateBounds(PointSet cells){
-        int xmin = 0, xmax = 0, ymin = 0, ymax = 0;
-        boolean firstRun = true;
-
-        for (Point p : cells){
-            if (firstRun) {
-                xmin = p.x;
-                ymin = p.y;
-                firstRun = false;
-            }
-            if (p.x < xmin) xmin = p.x;
-            if (p.y < ymin) ymin = p.y;
-            if (p.x > xmax) xmax = p.x;
-            if (p.y > ymax) ymax = p.y;
-        }
-        lx = xmin;
-        hx = xmax;
-        ly = ymin;
-        hy = ymax;
-    }
-
     public void updateBounds(Bounds b){
         lx = b.lx;
         hx = b.hx;

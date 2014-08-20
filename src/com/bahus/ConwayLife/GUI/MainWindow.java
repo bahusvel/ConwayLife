@@ -24,17 +24,25 @@ public class MainWindow {
     private JPanel canvasPanel;
     private JButton zoomIn;
     private JButton zoomOut;
-    private JCheckBox slowCheckBox;
+    //private JCheckBox slowCheckBox;
     private JSpinner playNumber;
     private JProgressBar progressBar1;
     private JCheckBox animateCheckBox;
     private JTabbedPane tabbedPane1;
+    private JTextField textField1;
+    private JButton browseButton;
+    private JButton saveButton;
+    private JButton loadButton;
+    private JPanel zoom;
+    private JPanel Settings;
+    private JSlider Speed;
+    private JComboBox comboBox1;
+    private JPanel playPanel;
     private boolean playPressed = false;
     private boolean slow = false;
     private boolean animate = true;
     private int GRIDSIZE = 10;
     private GenericLife nLife = new BitLife();
-    //private GenericLife nLife = new HashLife();
     private MouseTracer mt = new MouseTracer();
 
     public MainWindow() {
@@ -129,7 +137,6 @@ public class MainWindow {
         canvasPanel.repaint();
         });
 
-        slowCheckBox.addActionListener(e -> slow = !slow);
         zoomIn.addActionListener(e -> {
             GRIDSIZE++;
             canvasPanel.repaint();
