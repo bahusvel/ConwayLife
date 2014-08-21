@@ -195,7 +195,7 @@
                 <properties/>
                 <border type="none"/>
                 <children>
-                  <component id="25b5d" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+                  <component id="25b5d" class="javax.swing.JTextField" binding="fPath">
                     <constraints>
                       <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
                         <preferred-size width="150" height="-1"/>
@@ -341,12 +341,6 @@
                       </component>
                     </children>
                   </grid>
-                  <component id="53780" class="javax.swing.JComboBox" binding="comboBox1" default-binding="true">
-                    <constraints>
-                      <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
-                    </constraints>
-                    <properties/>
-                  </component>
                   <component id="1645d" class="javax.swing.JSeparator">
                     <constraints>
                       <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -358,6 +352,14 @@
                       <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
                     </constraints>
                     <properties/>
+                  </component>
+                  <component id="5c1c7" class="javax.swing.JComboBox" binding="formatChooser" custom-create="true">
+                    <constraints>
+                      <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <maximumRowCount value="20"/>
+                    </properties>
                   </component>
                 </children>
               </grid>

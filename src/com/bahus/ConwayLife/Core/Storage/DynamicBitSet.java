@@ -1,20 +1,16 @@
 package com.bahus.ConwayLife.Core.Storage;
 
+import gnu.trove.set.hash.TIntHashSet;
+
 /**
  * Created by denislavrov on 8/15/14.
  */
 
-public class DynamicBitSet /*implements BitArray2D*/{
-    public int getSizefactor() {
-        return sizefactor;
-    }
-
-    public void setSizefactor(int sizefactor) {
-        this.sizefactor = sizefactor;
-    }
-
-    private int sizefactor = 10;
+public class DynamicBitSet implements BitArray2D{
+    private static final int SIZEFACTOR = 10;
     private boolean[][] matrix;
+    private int lx = 0;
+    private int ly = 0;
 
     public DynamicBitSet(){
         matrix = new boolean[5][5];
@@ -27,9 +23,9 @@ public class DynamicBitSet /*implements BitArray2D*/{
     public void set(int x, int y, boolean value) {
         if (x >= matrix.length) {
             boolean[][] tmp = matrix;
-            matrix = new boolean[x + sizefactor][];
+            matrix = new boolean[x + SIZEFACTOR][];
             System.arraycopy(tmp, 0, matrix, 0, tmp.length);
-            for (int i = x; i < x + sizefactor; i++) {
+            for (int i = x; i < x + SIZEFACTOR; i++) {
                 matrix[i] = new boolean[y];
             }
         }
@@ -43,10 +39,72 @@ public class DynamicBitSet /*implements BitArray2D*/{
         matrix[x][y] = value;
     }
 
+    @Override
+    public int[] yValues() {
+        TIntHashSet ret = new TIntHashSet();
+        for (int x = 0; x < matrix.length - 1; x++) {
+            for (int y = 0; y < matrix[0].length - 1; y++) if (get(x,y)) ret.add(y);
+        }
+        return ret.toArray();
+    }
+
+    @Override
+    public int[] xValues(int y) {
+        TIntHashSet ret = new TIntHashSet();
+        for (int x = 0; x < matrix.length-1; x++) if (get(x,y)) ret.add(x);
+        return ret.toArray();
+    }
+
+    @Override
+    public Bounds getBounds() {
+        int ymin = 0, ymax = 0, xmin = 0, xmax = 0;
+        boolean firstRun = true;
+        for (int y : yValues()){
+            if (firstRun) ymin = y;
+            if (y < ymin) ymin = y;
+            if (y > ymax) ymax = y;
+            for (int x : xValues(y)){
+                if (firstRun){
+                    xmin = x;
+                    firstRun = false;
+                }
+                if (x < xmin) xmin = x;
+                if (x > xmax) xmax = x;
+            }
+        }
+        return new Bounds(xmin, ymin, xmax, ymax);
+    }
+
+    @Override
+    public Bounds getGrownBounds() {
+        final int GROWSIZE = 200;
+        Bounds bounds = getBounds();
+        bounds.hx += GROWSIZE;
+        bounds.hy += GROWSIZE;
+        bounds.lx -= GROWSIZE;
+        bounds.ly -= GROWSIZE;
+        return bounds;
+    }
+
+    @Override
+    public int size() {
+        int size = 0;
+        for (int y : yValues()) size += xValues(y).length;
+        return size;
+    }
+
+    @Override
+    public void clear() {
+        int xsize = matrix.length;
+        int ysize = matrix[0].length;
+        matrix = new boolean[xsize][ysize];
+    }
+
     public boolean get(int x, int y) {
         return !(x >= matrix.length || y >= matrix[x].length) && matrix[x][y];
     }
 
+    /*
     public static void main(String[] args) {
         DynamicBitSet matrix2d = new DynamicBitSet();
         long stime = System.nanoTime();
@@ -59,4 +117,5 @@ public class DynamicBitSet /*implements BitArray2D*/{
         System.out.println(matrix2d.get(100, 100)); // outputs 3
         System.out.println("The thing took " + (System.nanoTime() - stime)/1000);
     }
+    */
 }

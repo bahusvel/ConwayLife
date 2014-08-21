@@ -2,13 +2,20 @@ package com.bahus.ConwayLife.GUI;
 
 import com.bahus.ConwayLife.Core.BitLife;
 import com.bahus.ConwayLife.Core.GenericLife;
-import com.bahus.ConwayLife.Core.HashLife;
+import com.bahus.ConwayLife.Core.ImageController.ImageController;
 import com.bahus.ConwayLife.Core.Storage.BitArray2D;
 import com.bahus.ConwayLife.Core.Storage.Bounds;
+import org.apache.commons.io.FilenameUtils;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
 
 /**
  * Created by denislavrov on 8/14/14.
@@ -29,14 +36,14 @@ public class MainWindow {
     private JProgressBar progressBar1;
     private JCheckBox animateCheckBox;
     private JTabbedPane tabbedPane1;
-    private JTextField textField1;
+    private JTextField fPath;
     private JButton browseButton;
     private JButton saveButton;
     private JButton loadButton;
     private JPanel zoom;
     private JPanel Settings;
     private JSlider Speed;
-    private JComboBox comboBox1;
+    private JComboBox formatChooser;
     private JPanel playPanel;
     private boolean playPressed = false;
     private boolean animate = true;
@@ -44,7 +51,7 @@ public class MainWindow {
     private GenericLife nLife = new BitLife();
     //private GenericLife nLife = new HashLife();
     private MouseTracer mt = new MouseTracer();
-
+    private File ioFile;
     public MainWindow() {
         nLife.toggleCell(1,1);
         nLife.toggleCell(2,1);
@@ -150,6 +157,27 @@ public class MainWindow {
             canvasPanel.repaint();
         });
         animateCheckBox.addActionListener(e -> animate = !animate);
+        browseButton.addActionListener( e -> {
+            try {
+                getFileSimple();
+            }catch(NullPointerException ignored){
+
+            }
+
+                });
+        saveButton.addActionListener(e -> {
+            try {
+                getFile();
+                ImageController.save(nLife.getCells(), ioFile, (String) formatChooser.getSelectedItem());
+            }catch (NullPointerException exc){
+                JOptionPane.showMessageDialog(mainPanel,"You haven't selected any file.");
+            }
+
+        });
+
+        loadButton.addActionListener(e -> {
+
+        });
     }
 
 
@@ -157,12 +185,35 @@ public class MainWindow {
         return mainPanel;
     }
 
+    private void getFile() throws NullPointerException{
+        while (!FilenameUtils.getExtension(fPath.getText()).equals((String) formatChooser.getSelectedItem())) {
+            getFileSimple();
+            if(!FilenameUtils.getExtension(fPath.getText()).equals((String) formatChooser.getSelectedItem())){
+                JOptionPane.showMessageDialog(mainPanel,
+                        "You have selected file: " + ioFile.getName() + " of wrong type.\n"+
+                        "Correct extension is: " + (String) formatChooser.getSelectedItem() + "\n"+
+                        "You can change extensions in the Settings Tab.",
+                        "WRONG FILE TYPE SELECTED!",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void getFileSimple() throws NullPointerException{
+        FileFilter filter = new FileNameExtensionFilter("Image file", (String) formatChooser.getSelectedItem());
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(filter);
+        fileChooser.showDialog(mainPanel, "OK");
+        ioFile = fileChooser.getSelectedFile();
+        fPath.setText(ioFile.getAbsolutePath());
+    }
 
     private void createUIComponents() {
-            canvasPanel = new JPanel(){
+        formatChooser = new JComboBox<String>(ImageController.getFormats());
+        formatChooser.setSelectedItem("png");
+        canvasPanel = new JPanel() {
 
-                public Dimension getPreferredSize() {
-                return new Dimension(500,500);
+            public Dimension getPreferredSize() {
+                return new Dimension(500, 500);
             }
 
 

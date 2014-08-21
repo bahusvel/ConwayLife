@@ -11,6 +11,7 @@
     <orderEntry type="library" name="org.roaringbitmap:RoaringBitmap:0.3.6" level="project" />
     <orderEntry type="library" name="com.googlecode.javaewah:JavaEWAH:0.8.7" level="project" />
     <orderEntry type="library" name="javolution:javolution:5.5.1" level="project" />
+    <orderEntry type="library" name="commons-io:commons-io:2.4" level="project" />
   </component>
 </module>
 
