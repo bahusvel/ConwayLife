@@ -14,7 +14,7 @@ import java.io.IOException;
  */
 public class ImageController {
 
-    public static void save(BitArray2D cells, File file, String format){
+    public static boolean save(BitArray2D cells, File file, String format){
         Bounds bounds = cells.getBounds();
         int width = (bounds.hx - bounds.lx)+1 , height = (bounds.hy-bounds.ly)+1;
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
@@ -34,7 +34,31 @@ public class ImageController {
             ImageIO.write(bi, format, file);
         } catch (IOException ignored) {
             System.out.println("Something bad happened when writing the image");
+            return false;
         }
+        return true;
+    }
+
+    public static boolean load(BitArray2D cells, File file){
+        BufferedImage bi;
+        try {
+            bi = ImageIO.read(file);
+        } catch (IOException exc) {
+            System.out.println("Something bad happened when reading the image");
+            return false;
+        }
+        cells.clear();
+        for (int x = 0; x < bi.getWidth(); x++ ){
+            for (int y = 0; y < bi.getHeight(); y++){
+                cells.set(x,y,rgbToBoolean(bi.getRGB(x,y)));
+            }
+        }
+        return true;
+
+    }
+
+    private static boolean rgbToBoolean(int rgbInt){
+        return !(((rgbInt & 255) > 127) && (((rgbInt >> 8) & 255) > 127) && (((rgbInt >> 16) & 255) > 127));
 
     }
 
@@ -47,10 +71,6 @@ public class ImageController {
         newPixel += blue;
 
         return newPixel;
-    }
-
-    public static void load(BitArray2D cells, File file){
-
     }
 
     public static String[] getFormats(){

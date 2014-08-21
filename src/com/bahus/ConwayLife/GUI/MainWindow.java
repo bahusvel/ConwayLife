@@ -50,7 +50,6 @@ public class MainWindow {
     private boolean animate = true;
     private int GRIDSIZE = 10;
     private GenericLife nLife = new BitLife();
-    //private GenericLife nLife = new HashLife();
     private MouseTracer mt = new MouseTracer();
     private File ioFile;
 
@@ -270,7 +269,15 @@ public class MainWindow {
         });
 
         loadButton.addActionListener(e -> {
-
+            try {
+                getFile();
+                if (ioFile.canRead()) ImageController.load(nLife.getCells(), ioFile);
+            } catch (NullPointerException exc) {
+                JOptionPane.showMessageDialog(mainPanel, "You haven't selected any file.");
+            }
+            finally {
+                canvasPanel.repaint();
+            }
         });
     }
 }
