@@ -98,7 +98,6 @@ public class MainWindow {
                 return new Dimension(500, 500);
             }
 
-
             public void paintComponent(Graphics g) {
                 Graphics2D gg = (Graphics2D) g;
                 super.paintComponent(g);
@@ -133,10 +132,12 @@ public class MainWindow {
     private void drawCells(Graphics2D g, BitArray2D b, Bounds bounds) {
         for (int y : b.yValues()) {
             for (int x : b.xValues(y)) {
-                if (b.get(x, y)) {
+                int px = dx((x) * GRIDSIZE) + ((canvasPanel.getWidth()/2)/GRIDSIZE)*GRIDSIZE;
+                int py = dy((y) * GRIDSIZE) + ((canvasPanel.getHeight()/2)/GRIDSIZE)*GRIDSIZE;
+                if (canvasPanel.contains(px+GRIDSIZE/2,py+GRIDSIZE/2) && b.get(x, y)) {
                     g.fillRect(
-                            dx((x - bounds.lx) * GRIDSIZE),
-                            dy((y - bounds.ly) * GRIDSIZE),
+                            px,
+                            py,
                             GRIDSIZE,
                             GRIDSIZE
                     );
@@ -147,33 +148,30 @@ public class MainWindow {
     }
 
     private void initCells() {
-        nLife.toggleCell(1, 1);
-        nLife.toggleCell(2, 1);
-        nLife.toggleCell(2, 3);
-        nLife.toggleCell(4, 2);
-        nLife.toggleCell(5, 1);
-        nLife.toggleCell(6, 1);
-        nLife.toggleCell(7, 1);
+        nLife.toggleCell(0, 0);
+        nLife.toggleCell(1, 0);
+        nLife.toggleCell(1, 2);
+        nLife.toggleCell(3, 1);
+        nLife.toggleCell(4, 0);
+        nLife.toggleCell(5, 0);
+        nLife.toggleCell(6, 0);
     }
 
     private void setupMouse() {
         canvasPanel.addMouseListener(new MouseAdapter() {
             // I can add localized mouse listeners here.
 
-
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                Point mouseLocation = e.getPoint();
+                Point mL = e.getPoint();
+                int mlx = mL.x - ((canvasPanel.getWidth()/2)/GRIDSIZE)*GRIDSIZE;
+                int mly = mL.y - ((canvasPanel.getHeight()/2)/GRIDSIZE)*GRIDSIZE;
                 nLife.toggleCell(
-                        nLife.getBounds().lx + idx(mouseLocation.x) / GRIDSIZE,
-                        nLife.getBounds().ly + idy(mouseLocation.y) / GRIDSIZE
+                        idx(mlx) < 0 ? idx(mlx) / GRIDSIZE - 1 : idx(mlx) / GRIDSIZE,
+                        idy(mly) < 0 ? idy(mly) / GRIDSIZE - 1 : idy(mly) / GRIDSIZE
                 );
                 canvasPanel.repaint();
-                // When adding first cell after reset, it will always be added to position 0,0
-                // Because the boundaries of an object change and it will jump.
-                // I could solve this by adding a buffer
-                // or making a better algorithm to display the map, so action is centered.
 
             }
 
@@ -209,6 +207,9 @@ public class MainWindow {
                 System.gc();
             } else {
                 playPressed = !playPressed;
+                if (playPressed) playButton.setText("Stop");
+                else playButton.setText("Play");
+
                 int looptill = (Integer) playNumber.getValue();
                 Timer timer = new Timer(Speed.getValue(), new ActionListener() {
                     private int position;
@@ -217,7 +218,7 @@ public class MainWindow {
                     public void actionPerformed(ActionEvent e) {
                         position++;
                         nLife.nextGen();
-                        if ((position < looptill) && (playPressed)) {
+                        if ((playPressed) && (position < looptill)) {
                             progressBar1.setValue(1 + (int) ((double) position * 100.0 / (double) looptill));
                             canvasPanel.repaint();
                         } else {
@@ -225,6 +226,7 @@ public class MainWindow {
                             System.gc();
                             progressBar1.setValue(progressBar1.getMinimum());
                             playPressed = false;
+                            canvasPanel.repaint();
                         }
                     }
                 });

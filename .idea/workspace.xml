@@ -10,10 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f2e9e14-013d-49bc-8e49-fdf96b139bc3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/Bounds.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/Bounds.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ImageController/ImageController.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ImageController/ImageController.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MouseTracer.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MouseTracer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ConwayLife.iws" />
@@ -44,20 +41,21 @@
       <file leaf-file-name="MainWindow.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.9714829" vertical-offset="524" max-vertical-offset="1425">
-              <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.4068441" vertical-offset="836" max-vertical-offset="1365">
+              <caret line="149" column="29" selection-start-line="149" selection-start-column="29" selection-end-line="149" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#688#712#0" expanded="true" />
+                <element signature="method#MainWindow#0;class#MainWindow#0" expanded="false" />
                 <element signature="method#getFile#0;class#MainWindow#0" expanded="false" />
                 <element signature="method#getFileSimple#0;class#MainWindow#0" expanded="false" />
                 <element signature="method#createUIComponents#0;class#MainWindow#0" expanded="false" />
-                <element signature="class#3396:3829" expanded="false" />
-                <element signature="method#paintComponent#0;class#3396:3829" expanded="false" />
                 <element signature="method#drawGrid#0;class#MainWindow#0" expanded="false" />
                 <element signature="method#drawCells#0;class#MainWindow#0" expanded="false" />
                 <element signature="method#initCells#0;class#MainWindow#0" expanded="false" />
                 <element signature="method#setupMouse#0;class#MainWindow#0" expanded="false" />
+                <element signature="method#mouseReleased#0;class#5618:6594" expanded="false" />
+                <element signature="class#6645:7015" expanded="false" />
                 <element signature="method#setupButtons#0;class#MainWindow#0" expanded="false" />
               </folding>
             </state>
@@ -983,7 +981,7 @@
       <workItem from="1408579762307" duration="938000" />
       <workItem from="1408584161944" duration="10234000" />
       <workItem from="1408594552326" duration="3993000" />
-      <workItem from="1408609809764" duration="3046000" />
+      <workItem from="1408609809764" duration="7556000" />
     </task>
     <task id="LOCAL-00001" summary="test commit">
       <created>1408245294767</created>
@@ -1045,11 +1043,15 @@
       <created>1408598141830</created>
       <updated>1408598141830</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Grid is now infinite*">
+      <created>1408612873791</created>
+      <updated>1408612873791</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136677000" />
+    <option name="totallyTimeSpent" value="141187000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="815" extended-state="6" />
@@ -1150,7 +1152,8 @@
     <MESSAGE value="Added ability to export as image." />
     <MESSAGE value="Better Structure." />
     <MESSAGE value="Loading from image." />
-    <option name="LAST_COMMIT_MESSAGE" value="Loading from image." />
+    <MESSAGE value="Grid is now infinite*" />
+    <option name="LAST_COMMIT_MESSAGE" value="Grid is now infinite*" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1531,20 +1534,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9714829" vertical-offset="524" max-vertical-offset="1425">
-          <caret line="110" column="0" selection-start-line="110" selection-start-column="0" selection-end-line="110" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.4068441" vertical-offset="836" max-vertical-offset="1365">
+          <caret line="149" column="29" selection-start-line="149" selection-start-column="29" selection-end-line="149" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#688#712#0" expanded="true" />
+            <element signature="method#MainWindow#0;class#MainWindow#0" expanded="false" />
             <element signature="method#getFile#0;class#MainWindow#0" expanded="false" />
             <element signature="method#getFileSimple#0;class#MainWindow#0" expanded="false" />
             <element signature="method#createUIComponents#0;class#MainWindow#0" expanded="false" />
-            <element signature="class#3396:3829" expanded="false" />
-            <element signature="method#paintComponent#0;class#3396:3829" expanded="false" />
             <element signature="method#drawGrid#0;class#MainWindow#0" expanded="false" />
             <element signature="method#drawCells#0;class#MainWindow#0" expanded="false" />
             <element signature="method#initCells#0;class#MainWindow#0" expanded="false" />
             <element signature="method#setupMouse#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#mouseReleased#0;class#5618:6594" expanded="false" />
+            <element signature="class#6645:7015" expanded="false" />
             <element signature="method#setupButtons#0;class#MainWindow#0" expanded="false" />
           </folding>
         </state>
