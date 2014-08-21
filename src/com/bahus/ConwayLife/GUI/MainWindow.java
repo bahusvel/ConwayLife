@@ -4,7 +4,6 @@ import com.bahus.ConwayLife.Core.BitLife;
 import com.bahus.ConwayLife.Core.GenericLife;
 import com.bahus.ConwayLife.Core.ImageController.ImageController;
 import com.bahus.ConwayLife.Core.Storage.BitArray2D;
-import com.bahus.ConwayLife.Core.Storage.Bounds;
 import org.apache.commons.io.FilenameUtils;
 
 import javax.swing.*;
@@ -52,7 +51,6 @@ public class MainWindow {
     private GenericLife nLife = new BitLife();
     private MouseTracer mt = new MouseTracer();
     private File ioFile;
-    private Bounds cellBounds;
 
     public MainWindow() {
         setupMouse();
@@ -94,16 +92,12 @@ public class MainWindow {
         formatChooser.setSelectedItem("png");
         canvasPanel = new JPanel() {
 
-            public Dimension getPreferredSize() {
-                return new Dimension(500, 500);
-            }
-
             public void paintComponent(Graphics g) {
                 Graphics2D gg = (Graphics2D) g;
                 super.paintComponent(g);
                 // going to draw grid here.
                 drawGrid(gg);
-                drawCells(gg, nLife.getCells(), nLife.getBounds());
+                drawCells(gg, nLife.getCells());
             }
         };
     }
@@ -118,18 +112,18 @@ public class MainWindow {
                     x * GRIDSIZE - mt.tdx()%GRIDSIZE,
                     0,
                     x * GRIDSIZE - mt.tdx()%GRIDSIZE,
-                    (int) (height + 1) * GRIDSIZE - mt.tdy()%GRIDSIZE
+                    (int) (height + 1) * GRIDSIZE
             );
         for (int y = 0; y < height + 2; y++)
             g.drawLine(
                     0,
                     y * GRIDSIZE - mt.tdy()%GRIDSIZE,
-                    (int) (width + 1) * GRIDSIZE - mt.tdx()%GRIDSIZE,
+                    (int) (width + 1) * GRIDSIZE,
                     y * GRIDSIZE - mt.tdy()%GRIDSIZE
             );
     }
 
-    private void drawCells(Graphics2D g, BitArray2D b, Bounds bounds) {
+    private void drawCells(Graphics2D g, BitArray2D b) {
         for (int y : b.yValues()) {
             for (int x : b.xValues(y)) {
                 int px = dx((x) * GRIDSIZE) + ((canvasPanel.getWidth()/2)/GRIDSIZE)*GRIDSIZE;
@@ -251,7 +245,7 @@ public class MainWindow {
             canvasPanel.repaint();
         });
         zoomOut.addActionListener(e -> {
-            GRIDSIZE--;
+            if (GRIDSIZE > 2) GRIDSIZE--;
             canvasPanel.repaint();
         });
         animateCheckBox.addActionListener(e -> animate = !animate);
