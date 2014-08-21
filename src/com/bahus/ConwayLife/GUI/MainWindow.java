@@ -208,17 +208,15 @@ public class MainWindow {
             } else {
                 playPressed = !playPressed;
                 if (playPressed) playButton.setText("Stop");
-                else playButton.setText("Play");
-
                 int looptill = (Integer) playNumber.getValue();
                 Timer timer = new Timer(Speed.getValue(), new ActionListener() {
-                    private int position;
+                    private int position = 0;
 
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        position++;
-                        nLife.nextGen();
                         if ((playPressed) && (position < looptill)) {
+                            position++;
+                            nLife.nextGen();
                             progressBar1.setValue(1 + (int) ((double) position * 100.0 / (double) looptill));
                             canvasPanel.repaint();
                         } else {
@@ -226,6 +224,7 @@ public class MainWindow {
                             System.gc();
                             progressBar1.setValue(progressBar1.getMinimum());
                             playPressed = false;
+                            playButton.setText("Play");
                             canvasPanel.repaint();
                         }
                     }
