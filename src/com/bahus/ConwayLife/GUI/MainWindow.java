@@ -44,9 +44,11 @@ public class MainWindow {
     private JSlider Speed;
     private JComboBox formatChooser;
     private JPanel playPanel;
+    private JCheckBox drawGridCheckBox;
     // VARIABLES //
     private boolean playPressed = false;
     private boolean animate = true;
+    private boolean grid = true;
     private int GRIDSIZE = 10;
     private GenericLife nLife = new BitLife();
     private MouseTracer mt = new MouseTracer();
@@ -96,7 +98,7 @@ public class MainWindow {
                 Graphics2D gg = (Graphics2D) g;
                 super.paintComponent(g);
                 // going to draw grid here.
-                drawGrid(gg);
+                if (grid) drawGrid(gg);
                 drawCells(gg, nLife.getCells());
             }
         };
@@ -106,21 +108,28 @@ public class MainWindow {
         //initializing grid size and position
         int width = canvasPanel.getWidth() / GRIDSIZE;
         int height = canvasPanel.getHeight() / GRIDSIZE;
-
-        for (int x = 0; x < width + 2; x++)
+        Stroke bold = new BasicStroke(1.0f);
+        Stroke thin = new BasicStroke(0.5f);
+        for (int x = 0; x < width + 2; x++) {
+            if (((x + mt.tdx()/GRIDSIZE) % 4) == 0) g.setStroke(bold);
+            else g.setStroke(thin);
             g.drawLine(
-                    x * GRIDSIZE - mt.tdx()%GRIDSIZE,
+                    x * GRIDSIZE - mt.tdx() % GRIDSIZE,
                     0,
-                    x * GRIDSIZE - mt.tdx()%GRIDSIZE,
+                    x * GRIDSIZE - mt.tdx() % GRIDSIZE,
                     (int) (height + 1) * GRIDSIZE
             );
-        for (int y = 0; y < height + 2; y++)
+        }
+        for (int y = 0; y < height + 2; y++) {
+            if (((y + mt.tdy()/GRIDSIZE) % 4)  == 0) g.setStroke(bold);
+            else g.setStroke(thin);
             g.drawLine(
                     0,
-                    y * GRIDSIZE - mt.tdy()%GRIDSIZE,
+                    y * GRIDSIZE - mt.tdy() % GRIDSIZE,
                     (int) (width + 1) * GRIDSIZE,
-                    y * GRIDSIZE - mt.tdy()%GRIDSIZE
+                    y * GRIDSIZE - mt.tdy() % GRIDSIZE
             );
+        }
     }
 
     private void drawCells(Graphics2D g, BitArray2D b) {
@@ -277,6 +286,11 @@ public class MainWindow {
             finally {
                 canvasPanel.repaint();
             }
+        });
+
+        drawGridCheckBox.addActionListener(e -> {
+            grid = !grid;
+            canvasPanel.repaint();
         });
     }
 
