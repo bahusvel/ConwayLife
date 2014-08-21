@@ -75,6 +75,7 @@ public class BitLife implements GenericLife {
 
         }
     // clear the generated data
+
     gen.clear();
     }
 

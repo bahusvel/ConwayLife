@@ -39,10 +39,10 @@ public class MainWindow {
     private JComboBox comboBox1;
     private JPanel playPanel;
     private boolean playPressed = false;
-    private boolean slow = false;
     private boolean animate = true;
     private int GRIDSIZE = 10;
     private GenericLife nLife = new BitLife();
+    //private GenericLife nLife = new HashLife();
     private MouseTracer mt = new MouseTracer();
 
     public MainWindow() {
@@ -64,6 +64,10 @@ public class MainWindow {
                 Point mouseLocation = e.getPoint();
                 nLife.toggleCell(nLife.getBounds().lx+((mouseLocation.x+mt.tdx())/GRIDSIZE), nLife.getBounds().ly+((mouseLocation.y+mt.tdy())/GRIDSIZE));
                 canvasPanel.repaint();
+                // When adding first cell after reset, it will always be added to position 0,0
+                // Because the boundaries of an object change and it will jump.
+                // I could solve this by adding a buffer
+                // or making a better algorithm to display the map, so action is centered.
 
             }
 
@@ -101,7 +105,7 @@ public class MainWindow {
             else {
                 playPressed = !playPressed;
                 int looptill = (Integer) playNumber.getValue();
-                Timer timer = new Timer(slow ? 100 : 0, new ActionListener() {
+                Timer timer = new Timer(Speed.getValue(), new ActionListener() {
                     private int position;
 
                     @Override
