@@ -26,22 +26,12 @@ public class MouseTracer {
         hasReset = false;
     }
 
-    /* Unused functions
-    public Point getDelta(){
-        return deltaPosition;
-    }
-
-    public Point getTotalDelta(){
-        return new Point(totalDelta.x+deltaPosition.x, totalDelta.y+deltaPosition.y);
-    }
-    */
-
     public int tdx(){
-        return totalDelta.x+deltaPosition.x;
+        return totalDelta.x + deltaPosition.x;
     }
 
     public int tdy(){
-        return totalDelta.y+deltaPosition.y;
+        return totalDelta.y + deltaPosition.y;
     }
 
     public void resetDelta(){

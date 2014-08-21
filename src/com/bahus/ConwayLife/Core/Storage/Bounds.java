@@ -8,6 +8,8 @@ public class Bounds {
     public int ly;
     public int hx;
     public int hy;
+    public int width;
+    public int height;
 
     public Bounds() {
 
@@ -18,6 +20,8 @@ public class Bounds {
         ly = ymin;
         hx = xmax;
         hy = ymax;
+        width = xmax - xmin;
+        height = ymax - ymin;
     }
 
     public void updateBounds(Bounds b){
@@ -25,6 +29,8 @@ public class Bounds {
         hx = b.hx;
         ly = b.ly;
         hy = b.hy;
+        width = b.width;
+        height = b.height;
     }
 
     public boolean smaller(Bounds b){

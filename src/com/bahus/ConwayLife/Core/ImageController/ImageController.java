@@ -16,7 +16,7 @@ public class ImageController {
 
     public static boolean save(BitArray2D cells, File file, String format){
         Bounds bounds = cells.getBounds();
-        int width = (bounds.hx - bounds.lx)+1 , height = (bounds.hy-bounds.ly)+1;
+        int width = (bounds.width)+1 , height = (bounds.height)+1;
         BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_BINARY);
         Graphics gg = bi.getGraphics();
         gg.setColor(Color.white);

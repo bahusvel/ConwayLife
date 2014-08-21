@@ -52,6 +52,7 @@ public class MainWindow {
     private GenericLife nLife = new BitLife();
     private MouseTracer mt = new MouseTracer();
     private File ioFile;
+    private Bounds cellBounds;
 
     public MainWindow() {
         setupMouse();
@@ -109,36 +110,36 @@ public class MainWindow {
     }
 
     private void drawGrid(Graphics2D g) {
-        Bounds cellBounds = nLife.getBounds();
         //initializing grid size and position
-        Bounds bounds = new Bounds(0, 0,
-                ((canvasPanel.getWidth() / GRIDSIZE) < (cellBounds.hx - cellBounds.lx)) ? (cellBounds.hx - cellBounds.lx) : (canvasPanel.getWidth() / GRIDSIZE),
-                ((canvasPanel.getHeight() / GRIDSIZE) < (cellBounds.hy - cellBounds.ly)) ? (cellBounds.hy - cellBounds.ly) : (canvasPanel.getHeight() / GRIDSIZE)
-        );
+        int width = canvasPanel.getWidth() / GRIDSIZE;
+        int height = canvasPanel.getHeight() / GRIDSIZE;
 
-        for (int x = 0; x < (bounds.hx - bounds.lx) + 2; x++)
+        for (int x = 0; x < width + 2; x++)
             g.drawLine(
-                    x * GRIDSIZE - mt.tdx(),
-                    -mt.tdy(),
-                    x * GRIDSIZE - mt.tdx(),
-                    (int) (bounds.hy - bounds.ly + 1) * GRIDSIZE - mt.tdy()
+                    x * GRIDSIZE - mt.tdx()%GRIDSIZE,
+                    0,
+                    x * GRIDSIZE - mt.tdx()%GRIDSIZE,
+                    (int) (height + 1) * GRIDSIZE - mt.tdy()%GRIDSIZE
             );
-        for (int y = 0; y < (bounds.hy - bounds.ly) + 2; y++)
+        for (int y = 0; y < height + 2; y++)
             g.drawLine(
-                    -mt.tdx(),
-                    y * GRIDSIZE - mt.tdy(),
-                    (int) (bounds.hx - bounds.lx + 1) * GRIDSIZE - mt.tdx(),
-                    y * GRIDSIZE - mt.tdy()
+                    0,
+                    y * GRIDSIZE - mt.tdy()%GRIDSIZE,
+                    (int) (width + 1) * GRIDSIZE - mt.tdx()%GRIDSIZE,
+                    y * GRIDSIZE - mt.tdy()%GRIDSIZE
             );
     }
 
     private void drawCells(Graphics2D g, BitArray2D b, Bounds bounds) {
-        Rectangle cRect = new Rectangle();
         for (int y : b.yValues()) {
             for (int x : b.xValues(y)) {
                 if (b.get(x, y)) {
-                    cRect.setBounds((x - bounds.lx) * GRIDSIZE - mt.tdx(), (y - bounds.ly) * GRIDSIZE - mt.tdy(), GRIDSIZE, GRIDSIZE);
-                    g.fill(cRect);
+                    g.fillRect(
+                            dx((x - bounds.lx) * GRIDSIZE),
+                            dy((y - bounds.ly) * GRIDSIZE),
+                            GRIDSIZE,
+                            GRIDSIZE
+                    );
                 }
             }
         }
@@ -164,7 +165,10 @@ public class MainWindow {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 Point mouseLocation = e.getPoint();
-                nLife.toggleCell(nLife.getBounds().lx + ((mouseLocation.x + mt.tdx()) / GRIDSIZE), nLife.getBounds().ly + ((mouseLocation.y + mt.tdy()) / GRIDSIZE));
+                nLife.toggleCell(
+                        nLife.getBounds().lx + idx(mouseLocation.x) / GRIDSIZE,
+                        nLife.getBounds().ly + idy(mouseLocation.y) / GRIDSIZE
+                );
                 canvasPanel.repaint();
                 // When adding first cell after reset, it will always be added to position 0,0
                 // Because the boundaries of an object change and it will jump.
@@ -280,4 +284,21 @@ public class MainWindow {
             }
         });
     }
+
+    private int dx(int x){
+        return x - mt.tdx();
+    }
+
+    private int dy(int y){
+        return y - mt.tdy();
+    }
+
+    private int idx(int x){
+        return x + mt.tdx();
+    }
+
+    private int idy(int y){
+        return y + mt.tdy();
+    }
+
 }
