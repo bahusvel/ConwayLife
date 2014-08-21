@@ -23,6 +23,7 @@ import java.io.File;
 
 @SuppressWarnings("ALL")
 public class MainWindow {
+    // UI COMPONENTS //
     private JPanel mainPanel;
     private JButton nextGenerationButton;
     private JButton resetButton;
@@ -31,7 +32,6 @@ public class MainWindow {
     private JPanel canvasPanel;
     private JButton zoomIn;
     private JButton zoomOut;
-    //private JCheckBox slowCheckBox;
     private JSpinner playNumber;
     private JProgressBar progressBar1;
     private JCheckBox animateCheckBox;
@@ -45,6 +45,7 @@ public class MainWindow {
     private JSlider Speed;
     private JComboBox formatChooser;
     private JPanel playPanel;
+    // VARIABLES //
     private boolean playPressed = false;
     private boolean animate = true;
     private int GRIDSIZE = 10;
@@ -52,15 +53,110 @@ public class MainWindow {
     //private GenericLife nLife = new HashLife();
     private MouseTracer mt = new MouseTracer();
     private File ioFile;
-    public MainWindow() {
-        nLife.toggleCell(1,1);
-        nLife.toggleCell(2,1);
-        nLife.toggleCell(2,3);
-        nLife.toggleCell(4,2);
-        nLife.toggleCell(5,1);
-        nLife.toggleCell(6,1);
-        nLife.toggleCell(7,1);
 
+    public MainWindow() {
+        setupMouse();
+        setupButtons();
+        initCells();
+    }
+
+    public JPanel getMainPanel() {
+        return mainPanel;
+    }
+
+    private void getFile() throws NullPointerException {
+        while (!FilenameUtils.getExtension(fPath.getText()).equals((String) formatChooser.getSelectedItem())) {
+            getFileSimple();
+            if (!FilenameUtils.getExtension(fPath.getText()).equals((String) formatChooser.getSelectedItem())) {
+                JOptionPane.showMessageDialog(mainPanel,
+                        "You have selected file: " + ioFile.getName() + " of wrong type.\n" +
+                                "Correct extension is: " + (String) formatChooser.getSelectedItem() + "\n" +
+                                "You can change extensions in the Settings Tab.",
+                        "WRONG FILE TYPE SELECTED!", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        if (!ioFile.getAbsolutePath().equals(fPath.getText())){
+            ioFile = new File(fPath.getText());
+        }
+    }
+
+    private void getFileSimple() throws NullPointerException {
+        FileFilter filter = new FileNameExtensionFilter("Image file", (String) formatChooser.getSelectedItem());
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(filter);
+        fileChooser.showDialog(mainPanel, "OK");
+        ioFile = fileChooser.getSelectedFile();
+        fPath.setText(ioFile.getAbsolutePath());
+    }
+
+    private void createUIComponents() {
+        formatChooser = new JComboBox<String>(ImageController.getFormats());
+        formatChooser.setSelectedItem("png");
+        canvasPanel = new JPanel() {
+
+            public Dimension getPreferredSize() {
+                return new Dimension(500, 500);
+            }
+
+
+            public void paintComponent(Graphics g) {
+                Graphics2D gg = (Graphics2D) g;
+                super.paintComponent(g);
+                // going to draw grid here.
+                drawGrid(gg);
+                drawCells(gg, nLife.getCells(), nLife.getBounds());
+            }
+        };
+    }
+
+    private void drawGrid(Graphics2D g) {
+        Bounds cellBounds = nLife.getBounds();
+        //initializing grid size and position
+        Bounds bounds = new Bounds(0, 0,
+                ((canvasPanel.getWidth() / GRIDSIZE) < (cellBounds.hx - cellBounds.lx)) ? (cellBounds.hx - cellBounds.lx) : (canvasPanel.getWidth() / GRIDSIZE),
+                ((canvasPanel.getHeight() / GRIDSIZE) < (cellBounds.hy - cellBounds.ly)) ? (cellBounds.hy - cellBounds.ly) : (canvasPanel.getHeight() / GRIDSIZE)
+        );
+
+        for (int x = 0; x < (bounds.hx - bounds.lx) + 2; x++)
+            g.drawLine(
+                    x * GRIDSIZE - mt.tdx(),
+                    -mt.tdy(),
+                    x * GRIDSIZE - mt.tdx(),
+                    (int) (bounds.hy - bounds.ly + 1) * GRIDSIZE - mt.tdy()
+            );
+        for (int y = 0; y < (bounds.hy - bounds.ly) + 2; y++)
+            g.drawLine(
+                    -mt.tdx(),
+                    y * GRIDSIZE - mt.tdy(),
+                    (int) (bounds.hx - bounds.lx + 1) * GRIDSIZE - mt.tdx(),
+                    y * GRIDSIZE - mt.tdy()
+            );
+    }
+
+    private void drawCells(Graphics2D g, BitArray2D b, Bounds bounds) {
+        Rectangle cRect = new Rectangle();
+        for (int y : b.yValues()) {
+            for (int x : b.xValues(y)) {
+                if (b.get(x, y)) {
+                    cRect.setBounds((x - bounds.lx) * GRIDSIZE - mt.tdx(), (y - bounds.ly) * GRIDSIZE - mt.tdy(), GRIDSIZE, GRIDSIZE);
+                    g.fill(cRect);
+                }
+            }
+        }
+
+    }
+
+    private void initCells() {
+        nLife.toggleCell(1, 1);
+        nLife.toggleCell(2, 1);
+        nLife.toggleCell(2, 3);
+        nLife.toggleCell(4, 2);
+        nLife.toggleCell(5, 1);
+        nLife.toggleCell(6, 1);
+        nLife.toggleCell(7, 1);
+    }
+
+    private void setupMouse() {
         canvasPanel.addMouseListener(new MouseAdapter() {
             // I can add localized mouse listeners here.
 
@@ -69,7 +165,7 @@ public class MainWindow {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 Point mouseLocation = e.getPoint();
-                nLife.toggleCell(nLife.getBounds().lx+((mouseLocation.x+mt.tdx())/GRIDSIZE), nLife.getBounds().ly+((mouseLocation.y+mt.tdy())/GRIDSIZE));
+                nLife.toggleCell(nLife.getBounds().lx + ((mouseLocation.x + mt.tdx()) / GRIDSIZE), nLife.getBounds().ly + ((mouseLocation.y + mt.tdy()) / GRIDSIZE));
                 canvasPanel.repaint();
                 // When adding first cell after reset, it will always be added to position 0,0
                 // Because the boundaries of an object change and it will jump.
@@ -100,16 +196,15 @@ public class MainWindow {
             }
 
         });
+    }
 
-
-
+    private void setupButtons(){
         playButton.addActionListener(e -> {
-            if (!animate){
+            if (!animate) {
                 for (int i = 0; i < (Integer) playNumber.getValue(); i++) nLife.nextGen();
                 canvasPanel.repaint();
                 System.gc();
-            }
-            else {
+            } else {
                 playPressed = !playPressed;
                 int looptill = (Integer) playNumber.getValue();
                 Timer timer = new Timer(Speed.getValue(), new ActionListener() {
@@ -122,8 +217,7 @@ public class MainWindow {
                         if ((position < looptill) && (playPressed)) {
                             progressBar1.setValue(1 + (int) ((double) position * 100.0 / (double) looptill));
                             canvasPanel.repaint();
-                            }
-                        else {
+                        } else {
                             ((Timer) e.getSource()).stop();
                             System.gc();
                             progressBar1.setValue(progressBar1.getMinimum());
@@ -133,19 +227,19 @@ public class MainWindow {
                 });
                 timer.start();
             }
-    });
-    nextGenerationButton.addActionListener(e -> {
-        long stime = System.nanoTime();
-        nLife.nextGen();
-        System.out.printf("Generation took %d micro seconds.\n", (System.nanoTime() - stime)/1000);
-        canvasPanel.repaint();
+        });
+        nextGenerationButton.addActionListener(e -> {
+            long stime = System.nanoTime();
+            nLife.nextGen();
+            System.out.printf("Generation took %d micro seconds.\n", (System.nanoTime() - stime) / 1000);
+            canvasPanel.repaint();
 
-    });
-    resetButton.addActionListener(e -> {
-        nLife.reset();
-        mt.resetTotalDelta();
-        GRIDSIZE = 10;
-        canvasPanel.repaint();
+        });
+        resetButton.addActionListener(e -> {
+            nLife.reset();
+            mt.resetTotalDelta();
+            GRIDSIZE = 10;
+            canvasPanel.repaint();
         });
 
         zoomIn.addActionListener(e -> {
@@ -157,20 +251,20 @@ public class MainWindow {
             canvasPanel.repaint();
         });
         animateCheckBox.addActionListener(e -> animate = !animate);
-        browseButton.addActionListener( e -> {
+        browseButton.addActionListener(e -> {
             try {
                 getFileSimple();
-            }catch(NullPointerException ignored){
+            } catch (NullPointerException ignored) {
 
             }
 
-                });
+        });
         saveButton.addActionListener(e -> {
             try {
                 getFile();
                 ImageController.save(nLife.getCells(), ioFile, (String) formatChooser.getSelectedItem());
-            }catch (NullPointerException exc){
-                JOptionPane.showMessageDialog(mainPanel,"You haven't selected any file.");
+            } catch (NullPointerException exc) {
+                JOptionPane.showMessageDialog(mainPanel, "You haven't selected any file.");
             }
 
         });
@@ -179,87 +273,4 @@ public class MainWindow {
 
         });
     }
-
-
-    public JPanel getMainPanel(){
-        return mainPanel;
-    }
-
-    private void getFile() throws NullPointerException{
-        while (!FilenameUtils.getExtension(fPath.getText()).equals((String) formatChooser.getSelectedItem())) {
-            getFileSimple();
-            if(!FilenameUtils.getExtension(fPath.getText()).equals((String) formatChooser.getSelectedItem())){
-                JOptionPane.showMessageDialog(mainPanel,
-                        "You have selected file: " + ioFile.getName() + " of wrong type.\n"+
-                        "Correct extension is: " + (String) formatChooser.getSelectedItem() + "\n"+
-                        "You can change extensions in the Settings Tab.",
-                        "WRONG FILE TYPE SELECTED!",JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
-
-    private void getFileSimple() throws NullPointerException{
-        FileFilter filter = new FileNameExtensionFilter("Image file", (String) formatChooser.getSelectedItem());
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter(filter);
-        fileChooser.showDialog(mainPanel, "OK");
-        ioFile = fileChooser.getSelectedFile();
-        fPath.setText(ioFile.getAbsolutePath());
-    }
-
-    private void createUIComponents() {
-        formatChooser = new JComboBox<String>(ImageController.getFormats());
-        formatChooser.setSelectedItem("png");
-        canvasPanel = new JPanel() {
-
-            public Dimension getPreferredSize() {
-                return new Dimension(500, 500);
-            }
-
-
-            public void paintComponent(Graphics g) {
-                Graphics2D gg = (Graphics2D) g;
-                super.paintComponent(g);
-                // going to draw grid here.
-                drawGrid(gg);
-                drawCells(gg, nLife.getCells(), nLife.getBounds());
-            }
-        };
-    }
-
-    private void drawGrid(Graphics2D g){
-        Bounds cellBounds = nLife.getBounds();
-        //initializing grid size and position
-        Bounds bounds = new Bounds(0,0,
-                ((canvasPanel.getWidth()/GRIDSIZE) < (cellBounds.hx - cellBounds.lx)) ? (cellBounds.hx - cellBounds.lx) : (canvasPanel.getWidth()/GRIDSIZE),
-                ((canvasPanel.getHeight()/GRIDSIZE) < (cellBounds.hy - cellBounds.ly)) ? (cellBounds.hy - cellBounds.ly) : (canvasPanel.getHeight()/GRIDSIZE)
-        );
-
-        for (int x = 0; x < (bounds.hx - bounds.lx) + 2 ; x++ ) g.drawLine(
-                x*GRIDSIZE - mt.tdx(),
-                -mt.tdy(),
-                x*GRIDSIZE - mt.tdx(),
-                (int) (bounds.hy-bounds.ly+1)*GRIDSIZE - mt.tdy()
-        );
-        for (int y = 0; y < (bounds.hy - bounds.ly) + 2; y++ ) g.drawLine(
-                -mt.tdx(),
-                y*GRIDSIZE - mt.tdy(),
-                (int) (bounds.hx-bounds.lx+1)*GRIDSIZE - mt.tdx(),
-                y*GRIDSIZE - mt.tdy()
-        );
-    }
-
-    private void drawCells(Graphics2D g, BitArray2D b, Bounds bounds){
-        Rectangle cRect = new Rectangle();
-        for (int y : b.yValues()){
-            for (int x : b.xValues(y)) {
-                if(b.get(x,y)){
-                    cRect.setBounds((x-bounds.lx)*GRIDSIZE - mt.tdx(),(y-bounds.ly)*GRIDSIZE - mt.tdy(),GRIDSIZE,GRIDSIZE);
-                    g.fill(cRect);
-                }
-            }
-        }
-
-    }
-
 }
