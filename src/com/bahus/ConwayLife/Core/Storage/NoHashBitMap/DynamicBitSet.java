@@ -1,5 +1,6 @@
-package com.bahus.ConwayLife.Core.Storage;
+package com.bahus.ConwayLife.Core.Storage.NoHashBitMap;
 
+import com.bahus.ConwayLife.Core.Storage.Bounds;
 import gnu.trove.set.hash.TIntHashSet;
 
 /**
@@ -84,13 +85,6 @@ public class DynamicBitSet implements BitArray2D{
         bounds.lx -= GROWSIZE;
         bounds.ly -= GROWSIZE;
         return bounds;
-    }
-
-    @Override
-    public int size() {
-        int size = 0;
-        for (int y : yValues()) size += xValues(y).length;
-        return size;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.bahus.ConwayLife.Core.Storage;
+package com.bahus.ConwayLife.Core.Storage.HashedPointSet;
 
 /**
  * Created by denislavrov on 8/12/14.

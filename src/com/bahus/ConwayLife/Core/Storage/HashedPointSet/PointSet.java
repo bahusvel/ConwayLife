@@ -1,5 +1,7 @@
-package com.bahus.ConwayLife.Core.Storage;
+package com.bahus.ConwayLife.Core.Storage.HashedPointSet;
 
+import com.bahus.ConwayLife.Core.Storage.NoHashBitMap.BitArray2D;
+import com.bahus.ConwayLife.Core.Storage.Bounds;
 import gnu.trove.set.hash.THashSet;
 import gnu.trove.set.hash.TIntHashSet;
 
@@ -7,7 +9,7 @@ import gnu.trove.set.hash.TIntHashSet;
 /**
  * Created by denislavrov on 8/13/14.
  */
-public class PointSet extends THashSet<Point> implements BitArray2D{
+public class PointSet extends THashSet<Point> implements BitArray2D {
 
 
     private boolean contains(long x, long y){

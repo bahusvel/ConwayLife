@@ -1,6 +1,7 @@
-package com.bahus.ConwayLife.Core.Storage;
+package com.bahus.ConwayLife.Core.Storage.NoHashBitMap;
 
 
+import com.bahus.ConwayLife.Core.Storage.Bounds;
 import gnu.trove.map.hash.TIntObjectHashMap;
 import org.roaringbitmap.RoaringBitmap;
 
@@ -65,12 +66,6 @@ public class BitArrayMap implements BitArray2D{
         bounds.lx -= GROWSIZE;
         bounds.ly -= GROWSIZE;
         return bounds;
-    }
-
-    public int size(){
-        int size = 0;
-        for (int i : yValues()) size += getY(i).getCardinality();
-        return size;
     }
 
     public void clear(){

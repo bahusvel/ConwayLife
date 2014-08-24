@@ -1,17 +1,22 @@
-package com.bahus.ConwayLife.Core;
+package com.bahus.ConwayLife.Core.ConcurrentLife;
 
-import com.bahus.ConwayLife.Core.Storage.*;
+import com.bahus.ConwayLife.Core.GenericLife;
+import com.bahus.ConwayLife.Core.Storage.Bounds;
 import com.bahus.ConwayLife.Core.Storage.NoHashBitMap.BitArray2D;
 import com.bahus.ConwayLife.Core.Storage.NoHashBitMap.BitArrayMap;
+import com.bahus.ConwayLife.Core.Storage.WeightHashMap;
+
+import java.util.concurrent.ForkJoinPool;
 
 /**
- * Created by denislavrov on 8/15/14.
+ * Created by denislavrov on 8/24/14.
  */
-
-public class BitLife implements GenericLife {
+public class ConcurrentLife implements GenericLife {
     private Bounds bounds = new Bounds();
-    private BitArray2D cells = new BitArrayMap();
+    private BitArrayMap cells = new BitArrayMap();
     private WeightHashMap gen = new WeightHashMap(cells.getGrownBounds());
+    //private ConcurrentWeightMap gen = new ConcurrentWeightMap(cells.getGrownBounds());
+    private ForkJoinPool pool = new ForkJoinPool(/* Number of cores to be used goes here */);
 
 
 
@@ -42,22 +47,18 @@ public class BitLife implements GenericLife {
 
         // before creating new gen container check if the existing one is capable to hold data
         if (gen.getBounds().smaller(cells.getBounds())){
+           //gen = new ConcurrentWeightMap(cells.getGrownBounds());
             gen = new WeightHashMap(cells.getGrownBounds());
         }
 
-        for(int y : cells.yValues()){
-            for (int x : cells.xValues(y)){
-                gen.inc(x, y);
-                gen.inc(x-1,y-1);
-                gen.inc(x-1,y);
-                gen.inc(x-1,y+1);
-                gen.inc(x  ,y-1);
-                gen.inc(x  ,y+1);
-                gen.inc(x+1,y-1);
-                gen.inc(x+1, y);
-                gen.inc(x+1,y+1);
-            }
-        }
+        bounds.updateBounds(cells.getBounds());
+
+        RecursiveGeneration rg = new RecursiveGeneration(cells,
+                bounds.lx, bounds.ly,bounds.hx-bounds.lx+1, bounds.hy-bounds.ly+1,
+                gen);
+
+        pool.invoke(rg);
+
 
         for (long point : gen.keys()){
             int x = gen.getX(point);
@@ -76,9 +77,9 @@ public class BitLife implements GenericLife {
             }
 
         }
-    // clear the generated data
 
-    gen.clear();
+        // clear the generated data
+
+        gen.clear();
     }
-
 }

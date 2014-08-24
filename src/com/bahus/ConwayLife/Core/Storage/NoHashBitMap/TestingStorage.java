@@ -1,4 +1,4 @@
-package com.bahus.ConwayLife.Core.Storage;
+package com.bahus.ConwayLife.Core.Storage.NoHashBitMap;
 
 import java.util.Random;
 import java.util.Scanner;

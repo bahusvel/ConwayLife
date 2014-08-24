@@ -1,12 +1,14 @@
-package com.bahus.ConwayLife.Core.Storage;
+package com.bahus.ConwayLife.Core.ConcurrentLife;
 
-import gnu.trove.map.hash.TLongByteHashMap;
+import com.bahus.ConwayLife.Core.Storage.Bounds;
+import com.carrotsearch.hppc.LongByteOpenHashMap;
 
 /**
- * Created by denislavrov on 8/18/14.
+ * Created by denislavrov on 8/24/14.
  */
-public class WeightHashMap {
-    private TLongByteHashMap container;
+public class ConcurrentWeightMap {
+    //private ConcurrentHashMap<Long,Byte>  container;
+    private LongByteOpenHashMap container;
     public int width, height;
 
     public Bounds getBounds() {
@@ -15,16 +17,16 @@ public class WeightHashMap {
 
     private Bounds bounds;
 
-    public WeightHashMap(Bounds bounds){
+    public ConcurrentWeightMap(Bounds bounds){
         this.bounds = bounds;
         //System.out.println(bounds);
         this.height = (bounds.hy-bounds.ly+1);
         this.width = (bounds.hx-bounds.lx+1);
-        container = new TLongByteHashMap((width)*(height));
+        container = new LongByteOpenHashMap(width*height);
     }
 
     public synchronized void inc(int x, int y){
-        container.adjustOrPutValue((y-bounds.ly)*width + (x-bounds.lx),(byte)1,(byte)1);
+        container.putOrAdd(((y - bounds.ly) * width + (x - bounds.lx)),(byte)1,(byte)1);
     }
 
     public byte get(int x, int y){
@@ -36,7 +38,8 @@ public class WeightHashMap {
     }
 
     public long[] keys(){
-        return container.keys();
+        return container.keys;
+
     }
 
     public int getX(long point){
@@ -54,19 +57,5 @@ public class WeightHashMap {
     public void clear(){
         container.clear();
     }
-
-    public static void main(String[] args){
-        WeightHashMap gen = new WeightHashMap(new Bounds(-20, -20, 10, 10));
-        gen.inc(-5, 5);
-        gen.inc(-6,-5);
-        gen.inc(10,-20);
-        gen.inc(-5,-5);
-        System.out.println(gen.width);
-        for (long i : gen.keys()){
-            System.out.println(i + " " + gen.getX(i) + " " + gen.getY(i));
-        }
-        System.out.println();
-    }
-
 
 }

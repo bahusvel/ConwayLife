@@ -2,6 +2,8 @@ package com.bahus.ConwayLife.Core;
 
 
 import com.bahus.ConwayLife.Core.Storage.*;
+import com.bahus.ConwayLife.Core.Storage.HashedPointSet.PointSet;
+import com.bahus.ConwayLife.Core.Storage.NoHashBitMap.BitArray2D;
 
 /**
  * Created by denislavrov on 8/12/14.

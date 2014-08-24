@@ -1,9 +1,9 @@
 package com.bahus.ConwayLife.GUI;
 
 import com.bahus.ConwayLife.Core.BitLife;
+import com.bahus.ConwayLife.Core.ExternalData.Export_Import_Controller;
 import com.bahus.ConwayLife.Core.GenericLife;
-import com.bahus.ConwayLife.Core.ImageController.ImageController;
-import com.bahus.ConwayLife.Core.Storage.BitArray2D;
+import com.bahus.ConwayLife.Core.Storage.NoHashBitMap.BitArray2D;
 import org.apache.commons.io.FilenameUtils;
 
 import javax.swing.*;
@@ -45,11 +45,17 @@ public class MainWindow {
     private JComboBox formatChooser;
     private JPanel playPanel;
     private JCheckBox drawGridCheckBox;
+    private JButton gridColor;
+    private JButton cellsColor;
+    private Color gridC = Color.black;
+    private Color cellsC = Color.black;
     // VARIABLES //
     private boolean playPressed = false;
     private boolean animate = true;
     private boolean grid = true;
     private int GRIDSIZE = 10;
+    //private GenericLife nLife = new TrueHashLife();
+    //private GenericLife nLife = new ConcurrentLife();
     private GenericLife nLife = new BitLife();
     private MouseTracer mt = new MouseTracer();
     private File ioFile;
@@ -58,6 +64,14 @@ public class MainWindow {
         setupMouse();
         setupButtons();
         initCells();
+        gridColor.addActionListener(e -> {
+            gridC = JColorChooser.showDialog(gridColor,"Select the color for grid.", gridC);
+            canvasPanel.repaint();
+        });
+        cellsColor.addActionListener(e -> {
+            cellsC = JColorChooser.showDialog(cellsColor,"Select the color for cells.", cellsC);
+            canvasPanel.repaint();
+        });
     }
 
     public JPanel getMainPanel() {
@@ -65,9 +79,9 @@ public class MainWindow {
     }
 
     private void getFile() throws NullPointerException {
-        while (!FilenameUtils.getExtension(fPath.getText()).equals((String) formatChooser.getSelectedItem())) {
+        while (!Export_Import_Controller.validFormat(FilenameUtils.getExtension(fPath.getText()))) {
             getFileSimple();
-            if (!FilenameUtils.getExtension(fPath.getText()).equals((String) formatChooser.getSelectedItem())) {
+            if(!Export_Import_Controller.validFormat(FilenameUtils.getExtension(fPath.getText()))) {
                 JOptionPane.showMessageDialog(mainPanel,
                         "You have selected file: " + ioFile.getName() + " of wrong type.\n" +
                                 "Correct extension is: " + (String) formatChooser.getSelectedItem() + "\n" +
@@ -81,7 +95,7 @@ public class MainWindow {
     }
 
     private void getFileSimple() throws NullPointerException {
-        FileFilter filter = new FileNameExtensionFilter("Image file", (String) formatChooser.getSelectedItem());
+        FileFilter filter = new FileNameExtensionFilter("Image file", Export_Import_Controller.getFormats());
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(filter);
         fileChooser.showDialog(mainPanel, "OK");
@@ -90,8 +104,34 @@ public class MainWindow {
     }
 
     private void createUIComponents() {
-        formatChooser = new JComboBox<String>(ImageController.getFormats());
+        formatChooser = new JComboBox<String>(Export_Import_Controller.getFormats());
         formatChooser.setSelectedItem("png");
+        gridColor = new JButton(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D gg = (Graphics2D) g;
+                super.paintComponent(g);
+                gg.setColor(gridC);
+                gg.fillOval((int)(gridColor.getWidth()/2.0-gridColor.getWidth()/4.0),
+                        (int)(gridColor.getHeight()/2.0-gridColor.getWidth()/4.0),
+                        (int)(gridColor.getWidth()/2), (int)(gridColor.getWidth()/2));
+            }
+        };
+
+        cellsColor = new JButton(){
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D gg = (Graphics2D) g;
+                super.paintComponent(g);
+                gg.setColor(cellsC);
+                gg.fillOval((int)(cellsColor.getWidth()/2.0-cellsColor.getWidth()/4.0),
+                        (int)(cellsColor.getHeight()/2.0-cellsColor.getWidth()/4.0),
+                        (int)(cellsColor.getWidth()/2), (int)(cellsColor.getWidth()/2));
+            }
+        };
+
+
+
         canvasPanel = new JPanel() {
 
             public void paintComponent(Graphics g) {
@@ -105,6 +145,7 @@ public class MainWindow {
     }
 
     private void drawGrid(Graphics2D g) {
+        g.setColor(gridC);
         //initializing grid size and position
         int width = canvasPanel.getWidth() / GRIDSIZE;
         int height = canvasPanel.getHeight() / GRIDSIZE;
@@ -133,10 +174,11 @@ public class MainWindow {
     }
 
     private void drawCells(Graphics2D g, BitArray2D b) {
+        g.setColor(cellsC);
         for (int y : b.yValues()) {
             for (int x : b.xValues(y)) {
-                int px = dx((x) * GRIDSIZE) + ((canvasPanel.getWidth()/2)/GRIDSIZE)*GRIDSIZE;
-                int py = dy((y) * GRIDSIZE) + ((canvasPanel.getHeight()/2)/GRIDSIZE)*GRIDSIZE;
+                int px = dx((x) * GRIDSIZE) + canvasPanel.getWidth()/2/GRIDSIZE*GRIDSIZE;
+                int py = dy((y) * GRIDSIZE) + canvasPanel.getHeight()/2/GRIDSIZE*GRIDSIZE;
                 if (canvasPanel.contains(px+GRIDSIZE/2,py+GRIDSIZE/2) && b.get(x, y)) {
                     g.fillRect(
                             px,
@@ -266,10 +308,10 @@ public class MainWindow {
             }
 
         });
-        saveButton.addActionListener(e -> {
+        saveButton.addActionListener(s -> {
             try {
                 getFile();
-                ImageController.save(nLife.getCells(), ioFile, (String) formatChooser.getSelectedItem());
+                Export_Import_Controller.save(nLife.getCells(), ioFile, FilenameUtils.getExtension(fPath.getText()));
             } catch (NullPointerException exc) {
                 JOptionPane.showMessageDialog(mainPanel, "You haven't selected any file.");
             }
@@ -279,7 +321,7 @@ public class MainWindow {
         loadButton.addActionListener(e -> {
             try {
                 getFile();
-                if (ioFile.canRead()) ImageController.load(nLife.getCells(), ioFile);
+                if (ioFile.canRead()) Export_Import_Controller.load(nLife.getCells(), ioFile, FilenameUtils.getExtension(fPath.getText()));
             } catch (NullPointerException exc) {
                 JOptionPane.showMessageDialog(mainPanel, "You haven't selected any file.");
             }

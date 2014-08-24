@@ -1,4 +1,6 @@
-package com.bahus.ConwayLife.Core.Storage;
+package com.bahus.ConwayLife.Core.Storage.NoHashBitMap;
+
+import com.bahus.ConwayLife.Core.Storage.Bounds;
 
 /**
  * Created by denislavrov on 8/16/14.
@@ -10,7 +12,6 @@ public interface BitArray2D {
     public int[] xValues(int y);
     public Bounds getBounds();
     public Bounds getGrownBounds();
-    public int size();
     public void clear();
 
 

@@ -71,21 +71,21 @@ Instructions: (pc=0x000000012737a978)
 Register to memory mapping:
 
 RAX=0x000000076ae5fb28 is an oop
-com.bahus.ConwayLife.Core.Storage.PointSet$$Lambda$11/128827885
+com.bahus.ConwayLife.Core.Storage.HashedPointSet.PointSet$$Lambda$11/128827885
  - klass: 'com/bahus/ConwayLife/Core/PointSet$$Lambda$11'
 RBX=0x000000013a1782c0 is an unknown value
 RCX=0x0000000000000000 is an unknown value
 RDX=0x000000076ae5fb28 is an oop
-com.bahus.ConwayLife.Core.Storage.PointSet$$Lambda$11/128827885
+com.bahus.ConwayLife.Core.Storage.HashedPointSet.PointSet$$Lambda$11/128827885
  - klass: 'com/bahus/ConwayLife/Core/PointSet$$Lambda$11'
 RSP=0x000000012f5d1630 is pointing into the stack for thread: 0x00007fb3948f4000
 RBP=0x000000012737a978 is an unknown value
 RSI=0x000000076ae5fb28 is an oop
-com.bahus.ConwayLife.Core.Storage.PointSet$$Lambda$11/128827885
+com.bahus.ConwayLife.Core.Storage.HashedPointSet.PointSet$$Lambda$11/128827885
  - klass: 'com/bahus/ConwayLife/Core/PointSet$$Lambda$11'
 RDI=0x000000012f5d15a8 is pointing into the stack for thread: 0x00007fb3948f4000
 R8 =0x000000076ae5fb28 is an oop
-com.bahus.ConwayLife.Core.Storage.PointSet$$Lambda$11/128827885
+com.bahus.ConwayLife.Core.Storage.HashedPointSet.PointSet$$Lambda$11/128827885
  - klass: 'com/bahus/ConwayLife/Core/PointSet$$Lambda$11'
 R9 =0x000000010d45e344: UseCompressedClassPointers+0 in /Library/Java/JavaVirtualMachines/jdk1.8.0_11.jdk/Contents/Home/jre/lib/server/libjvm.dylib at 0x000000010cc00000
 R10=0x0000000003b572fd is an unknown value
@@ -170,8 +170,8 @@ Event: 12.615 Thread 0x00007fb391828800 1902       4       java.lang.invoke.Lamb
 Event: 12.615 Thread 0x00007fb391828800 nmethod 1902 0x000000010e0f5590 code [0x000000010e0f56e0, 0x000000010e0f5798]
 Event: 12.615 Thread 0x00007fb391828800 1905       4       java.lang.invoke.LambdaForm$DMH/1789082526::invokeStatic_L_L (14 bytes)
 Event: 12.616 Thread 0x00007fb391828800 nmethod 1905 0x000000010e0eeed0 code [0x000000010e0ef020, 0x000000010e0ef0c8]
-Event: 12.616 Thread 0x00007fb391828800 1906       4       com.bahus.ConwayLife.Core.Storage.PointSet$$Lambda$11/128827885::get$Lambda (9 bytes)
-Event: 12.617 Thread 0x00007fb391829000 2004 %     3       com.bahus.ConwayLife.Core.Storage.PointSet::removeAll @ 5 (40 bytes)
+Event: 12.616 Thread 0x00007fb391828800 1906       4       com.bahus.ConwayLife.Core.Storage.HashedPointSet.PointSet$$Lambda$11/128827885::get$Lambda (9 bytes)
+Event: 12.617 Thread 0x00007fb391829000 2004 %     3       com.bahus.ConwayLife.Core.Storage.HashedPointSet.PointSet::removeAll @ 5 (40 bytes)
 Event: 12.617 Thread 0x00007fb391828800 nmethod 1906 0x000000010e0eec10 code [0x000000010e0eed60, 0x000000010e0eee38]
 Event: 12.617 Thread 0x00007fb391828800 1957       4       sun.java2d.pipe.RenderBuffer::putFloat (26 bytes)
 
