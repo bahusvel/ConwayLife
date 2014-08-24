@@ -10,52 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f2e9e14-013d-49bc-8e49-fdf96b139bc3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/BooleanCell.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/ComposedCell.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ConcurrentLife/ConcurrentLife.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ConcurrentLife/ConcurrentWeightMap.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/SmallEntityHash/Entity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/SmallEntityHash/EntityManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/FourCell.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/HashlifeAlgo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/HashlifeDrawer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/HashlifeState.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/HexaCell.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/IntBooleanArray.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/LifeAlgo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/LifeDrawer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/LifeState.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/MacroCell.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/Memoization.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ExternalData/RLE.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ConcurrentLife/RecursiveGeneration.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ConcurrentLife/SimpleGenerator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/SmallHashLife.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/SmallEntityHash/SmallHashManager.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/Test.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/TrueHashLife.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/com_carrotsearch_hppc_0_6_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/dist.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/quaqua.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/com_googlecode_javaewah_JavaEWAH_0_8_7.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/javolution_javolution_5_5_1.xml" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ImageController/ImageController.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ExternalData/Export_Import_Controller.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/BitArray2D.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/NoHashBitMap/BitArray2D.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/BitArrayMap.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/NoHashBitMap/BitArrayMap.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/DynamicBitSet.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/NoHashBitMap/DynamicBitSet.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/Point.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/HashedPointSet/Point.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/PointSet.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/HashedPointSet/PointSet.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/TestingStorage.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/NoHashBitMap/TestingStorage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/BitLife.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/BitLife.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ConwayLife.iml" afterPath="$PROJECT_DIR$/ConwayLife.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/ConwayLife_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/ConwayLife_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/GenericLife.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/GenericLife.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/HashLife.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/HashLife.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.form" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.form" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/Runner.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/Runner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/WeightHashMap.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/WeightHashMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/hs_err_pid2502.log" afterPath="$PROJECT_DIR$/hs_err_pid2502.log" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ConwayLife.iws" />
@@ -86,9 +42,18 @@
       <file leaf-file-name="MainWindow.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="5055">
-              <caret line="67" column="92" selection-start-line="67" selection-start-column="92" selection-end-line="67" selection-end-column="92" />
-              <folding />
+            <state vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="1320">
+              <caret line="239" column="31" selection-start-line="239" selection-start-column="31" selection-end-line="239" selection-end-column="31" />
+              <folding>
+                <element signature="method#getFile#0;class#MainWindow#0" expanded="false" />
+                <element signature="method#getFileSimple#0;class#MainWindow#0" expanded="false" />
+                <element signature="method#createUIComponents#0;class#MainWindow#0" expanded="false" />
+                <element signature="method#drawGrid#0;class#MainWindow#0" expanded="false" />
+                <element signature="method#drawCells#0;class#MainWindow#0" expanded="false" />
+                <element signature="method#initCells#0;class#MainWindow#0" expanded="false" />
+                <element signature="method#setupMouse#0;class#MainWindow#0" expanded="false" />
+                <element signature="method#setupButtons#0;class#MainWindow#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -97,48 +62,26 @@
         <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/Runner.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
-              <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
-              <folding>
-                <element signature="e#413#421#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RecursiveGeneration.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ConcurrentLife/RecursiveGeneration.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="424" max-vertical-offset="1140">
-              <caret line="55" column="9" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
+              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RLE.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ExternalData/RLE.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="2400">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Export_Import_Controller.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Export_Import_Controller.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ExternalData/Export_Import_Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7701674" vertical-offset="1069" max-vertical-offset="1845">
-              <caret line="113" column="22" selection-start-line="113" selection-start-column="22" selection-end-line="113" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1845">
+              <caret line="103" column="52" selection-start-line="103" selection-start-column="52" selection-end-line="103" selection-end-column="52" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BitLife.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="BitLife.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/BitLife.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="915" max-vertical-offset="1350">
+            <state vertical-scroll-proportion="0.47488585" vertical-offset="513" max-vertical-offset="1260">
               <caret line="61" column="37" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
               <folding />
             </state>
@@ -209,9 +152,9 @@
         <option value="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ConcurrentLife/RecursiveGeneration.java" />
         <option value="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ConcurrentLife/ConcurrentWeightMap.java" />
         <option value="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ExternalData/Export_Import_Controller.java" />
-        <option value="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.java" />
-        <option value="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/Runner.java" />
         <option value="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.form" />
+        <option value="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/Runner.java" />
+        <option value="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.java" />
       </list>
     </option>
   </component>
@@ -1015,7 +958,7 @@
       <workItem from="1408760500756" duration="3883000" />
       <workItem from="1408845441471" duration="9790000" />
       <workItem from="1408856275242" duration="4206000" />
-      <workItem from="1408860582910" duration="880000" />
+      <workItem from="1408860582910" duration="1135000" />
     </task>
     <task id="LOCAL-00001" summary="test commit">
       <created>1408245294767</created>
@@ -1097,11 +1040,15 @@
       <created>1408621077790</created>
       <updated>1408621077790</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Lots and lots of changes.">
+      <created>1408861490660</created>
+      <updated>1408861490660</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="171294000" />
+    <option name="totallyTimeSpent" value="171549000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1440" y="-91" width="1920" height="1058" extended-state="6" />
@@ -1207,7 +1154,8 @@
     <MESSAGE value="Minor batch play fix." />
     <MESSAGE value="Code cleanup." />
     <MESSAGE value="Ability to remove grid." />
-    <option name="LAST_COMMIT_MESSAGE" value="Ability to remove grid." />
+    <MESSAGE value="Lots and lots of changes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Lots and lots of changes." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1497,6 +1445,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4351145" vertical-offset="0" max-vertical-offset="655">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1504,6 +1453,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.27480915" vertical-offset="255" max-vertical-offset="1260">
           <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
+          <folding>
+            <element signature="e#941#942#0" expanded="false" />
+            <element signature="e#980#981#0" expanded="false" />
+            <element signature="e#1014#1015#0" expanded="false" />
+            <element signature="e#1054#1055#0" expanded="false" />
+            <element signature="e#2014#2015#0" expanded="false" />
+            <element signature="e#2047#2048#0" expanded="false" />
+            <element signature="e#2078#2079#0" expanded="false" />
+            <element signature="e#2121#2122#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1525,13 +1484,21 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.6274809" vertical-offset="279" max-vertical-offset="1305">
           <caret line="50" column="60" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="60" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/BitLife.java">
+    <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.form">
+      <provider selected="true" editor-type-id="ui-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ConcurrentLife/RecursiveGeneration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="275" max-vertical-offset="1260">
-          <caret line="61" column="37" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
+        <state vertical-scroll-proportion="1.1643835" vertical-offset="0" max-vertical-offset="1140">
+          <caret line="55" column="9" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -1544,41 +1511,43 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ConcurrentLife/RecursiveGeneration.java">
+    <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="485" max-vertical-offset="1140">
-          <caret line="55" column="9" selection-start-line="55" selection-start-column="9" selection-end-line="55" selection-end-column="9" />
-          <folding />
+        <state vertical-scroll-proportion="0.0" vertical-offset="663" max-vertical-offset="1320">
+          <caret line="239" column="31" selection-start-line="239" selection-start-column="31" selection-end-line="239" selection-end-column="31" />
+          <folding>
+            <element signature="method#getFile#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#getFileSimple#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#createUIComponents#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#drawGrid#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#drawCells#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#initCells#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#setupMouse#0;class#MainWindow#0" expanded="false" />
+            <element signature="method#setupButtons#0;class#MainWindow#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/Runner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
-          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
-          <folding>
-            <element signature="e#413#421#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="5055">
-          <caret line="67" column="92" selection-start-line="67" selection-start-column="92" selection-end-line="67" selection-end-column="92" />
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.form">
-      <provider selected="true" editor-type-id="ui-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ExternalData/Export_Import_Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7701674" vertical-offset="1069" max-vertical-offset="1845">
-          <caret line="113" column="22" selection-start-line="113" selection-start-column="22" selection-end-line="113" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1845">
+          <caret line="103" column="52" selection-start-line="103" selection-start-column="52" selection-end-line="103" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/BitLife.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47488585" vertical-offset="513" max-vertical-offset="1260">
+          <caret line="61" column="37" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
           <folding />
         </state>
       </provider>

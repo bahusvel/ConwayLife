@@ -14,13 +14,13 @@ public class Runner {
     public static void main(String[] args) {
         // Runnable() replaced with lambda
         EventQueue.invokeLater( () -> {
-            Set<String> includes = new HashSet<String>();
-            includes.add("ColorChooser");
-            QuaquaManager.setIncludedUIs(includes);
             try {
+                Set<String> includes = new HashSet<>();
+                includes.add("ColorChooser");
+                QuaquaManager.setIncludedUIs(includes);
                 UIManager.setLookAndFeel(QuaquaManager.getLookAndFeel());
-            } catch (UnsupportedLookAndFeelException e) {
-                e.printStackTrace();
+            } catch (Exception e) {
+                System.out.println("No pretty interface for you :(");
             }
 
             JFrame frame = new JFrame("Conway's Game of Life.");

@@ -64,14 +64,7 @@ public class MainWindow {
         setupMouse();
         setupButtons();
         initCells();
-        gridColor.addActionListener(e -> {
-            gridC = JColorChooser.showDialog(gridColor,"Select the color for grid.", gridC);
-            canvasPanel.repaint();
-        });
-        cellsColor.addActionListener(e -> {
-            cellsC = JColorChooser.showDialog(cellsColor,"Select the color for cells.", cellsC);
-            canvasPanel.repaint();
-        });
+
     }
 
     public JPanel getMainPanel() {
@@ -332,6 +325,15 @@ public class MainWindow {
 
         drawGridCheckBox.addActionListener(e -> {
             grid = !grid;
+            canvasPanel.repaint();
+        });
+
+        gridColor.addActionListener(e -> {
+            gridC = JColorChooser.showDialog(gridColor,"Select the color for grid.", gridC);
+            canvasPanel.repaint();
+        });
+        cellsColor.addActionListener(e -> {
+            cellsC = JColorChooser.showDialog(cellsColor,"Select the color for cells.", cellsC);
             canvasPanel.repaint();
         });
     }
