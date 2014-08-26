@@ -10,26 +10,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9f2e9e14-013d-49bc-8e49-fdf96b139bc3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/NoHashBitMap/BitSetMap.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/NoHashBitMap/BitSetTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/CellHashLife/CellHashGenerator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/CellHashLife/CellHashLife.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/NoHashBitMap/LongMappedSet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/NoHashBitMap/BitArray2D.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/NoHashBitMap/BitArray2D.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/NoHashBitMap/BitArrayMap.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/NoHashBitMap/BitArrayMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/BitLife.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/BitLife.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ConcurrentLife/ConcurrentLife.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/ConcurrentLife/ConcurrentLife.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/artifacts/ConwayLife_jar.xml" afterPath="$PROJECT_DIR$/.idea/artifacts/ConwayLife_jar.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/NoHashBitMap/DynamicBitSet.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/NoHashBitMap/DynamicBitSet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/GenericLife.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/GenericLife.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/HashLife.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/HashLife.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/IntBooleanArray.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/IntBooleanArray.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/GUI/MainWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/HashedPointSet/PointSet.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/HashedPointSet/PointSet.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/SmallHashLife.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/SmallHashLife.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/TrueHashLife.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/TrueHashLife/TrueHashLife.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/WeightHashMap.java" afterPath="$PROJECT_DIR$/src/com/bahus/ConwayLife/Core/Storage/WeightHashMap.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ConwayLife.iws" />
@@ -291,6 +271,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -395,8 +377,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -408,7 +388,7 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="fileTemplates" />
+    <property name="options.lastSelected" value="settings.github" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -1024,7 +1004,9 @@
       <workItem from="1409026260543" duration="79000" />
       <workItem from="1409026543115" duration="58000" />
       <workItem from="1409027355516" duration="612000" />
-      <workItem from="1409028255951" duration="5000" />
+      <workItem from="1409028255951" duration="225000" />
+      <workItem from="1409028483703" duration="5000" />
+      <workItem from="1409028515574" duration="5000" />
     </task>
     <task id="LOCAL-00001" summary="test commit">
       <created>1408245294767</created>
@@ -1114,11 +1096,15 @@
       <created>1408861736034</created>
       <updated>1408861736034</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Uses lookup map to check if cell will be alive or not.">
+      <created>1409028315060</created>
+      <updated>1409028315060</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="216662000" />
+    <option name="totallyTimeSpent" value="216892000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="22" width="1440" height="815" extended-state="6" />
@@ -1142,12 +1128,12 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.17360115" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15665236" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15665236" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37339056" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Graphical Navigator" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.1881259" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Analyze Dataflow from" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Analyze Dataflow from" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32978722" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287234" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -1226,7 +1212,8 @@
     <MESSAGE value="Ability to remove grid." />
     <MESSAGE value="Lots and lots of changes." />
     <MESSAGE value="Better Look and feel handling." />
-    <option name="LAST_COMMIT_MESSAGE" value="Better Look and feel handling." />
+    <MESSAGE value="Uses lookup map to check if cell will be alive or not." />
+    <option name="LAST_COMMIT_MESSAGE" value="Uses lookup map to check if cell will be alive or not." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
