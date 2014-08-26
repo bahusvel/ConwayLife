@@ -13,6 +13,7 @@ public interface BitArray2D {
     public Bounds getBounds();
     public Bounds getGrownBounds();
     public void clear();
+    public void cleanup();
 
 
 

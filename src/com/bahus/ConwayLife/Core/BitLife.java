@@ -1,8 +1,9 @@
 package com.bahus.ConwayLife.Core;
 
-import com.bahus.ConwayLife.Core.Storage.*;
+import com.bahus.ConwayLife.Core.Storage.Bounds;
 import com.bahus.ConwayLife.Core.Storage.NoHashBitMap.BitArray2D;
-import com.bahus.ConwayLife.Core.Storage.NoHashBitMap.BitArrayMap;
+import com.bahus.ConwayLife.Core.Storage.NoHashBitMap.BitSetMap;
+import com.bahus.ConwayLife.Core.Storage.WeightHashMap;
 
 /**
  * Created by denislavrov on 8/15/14.
@@ -10,13 +11,18 @@ import com.bahus.ConwayLife.Core.Storage.NoHashBitMap.BitArrayMap;
 
 public class BitLife implements GenericLife {
     private Bounds bounds = new Bounds();
-    private BitArray2D cells = new BitArrayMap();
+    //private BitArray2D cells = new BitArrayMap();
+    private BitArray2D cells = new BitSetMap();
     private WeightHashMap gen = new WeightHashMap(cells.getGrownBounds());
-
-
+    public long genCount = 0;
 
     public BitArray2D getCells(){
         return cells;
+    }
+
+    @Override
+    public void cleanup() {
+        cells.cleanup();
     }
 
     @Override
@@ -39,7 +45,7 @@ public class BitLife implements GenericLife {
 
 
     public void nextGen() {
-
+        genCount++;
         // before creating new gen container check if the existing one is capable to hold data
         if (gen.getBounds().smaller(cells.getBounds())){
             gen = new WeightHashMap(cells.getGrownBounds());
@@ -72,13 +78,9 @@ public class BitLife implements GenericLife {
                 default:
                     cells.set(x,y, false);
                     break;
-
             }
-
+            gen.clearPoint(point);
         }
-    // clear the generated data
-
-    gen.clear();
     }
 
 }

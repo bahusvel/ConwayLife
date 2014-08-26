@@ -45,4 +45,9 @@ public class SmallHashLife implements GenericLife{
     public BitArray2D getCells() {
         return null;
     }
+
+    @Override
+    public void cleanup() {
+        cells.cleanup();
+    }
 }

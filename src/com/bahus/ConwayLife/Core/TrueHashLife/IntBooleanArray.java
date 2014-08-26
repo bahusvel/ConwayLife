@@ -77,4 +77,9 @@ public class IntBooleanArray implements BitArray2D{
     public void clear() {
         algo.loadFromArray(new int[10][10]);
     }
+
+    @Override
+    public void cleanup() {
+        System.gc();
+    }
 }

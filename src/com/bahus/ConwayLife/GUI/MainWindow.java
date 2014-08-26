@@ -1,6 +1,6 @@
 package com.bahus.ConwayLife.GUI;
 
-import com.bahus.ConwayLife.Core.BitLife;
+import com.bahus.ConwayLife.Core.CellHashLife.CellHashLife;
 import com.bahus.ConwayLife.Core.ExternalData.Export_Import_Controller;
 import com.bahus.ConwayLife.Core.GenericLife;
 import com.bahus.ConwayLife.Core.Storage.NoHashBitMap.BitArray2D;
@@ -56,7 +56,8 @@ public class MainWindow {
     private int GRIDSIZE = 10;
     //private GenericLife nLife = new TrueHashLife();
     //private GenericLife nLife = new ConcurrentLife();
-    private GenericLife nLife = new BitLife();
+    //private GenericLife nLife = new BitLife();
+    private GenericLife nLife = new CellHashLife();
     private MouseTracer mt = new MouseTracer();
     private File ioFile;
 
@@ -224,6 +225,7 @@ public class MainWindow {
 
         });
 
+
         canvasPanel.addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
@@ -236,6 +238,7 @@ public class MainWindow {
 
         });
     }
+
 
     private void setupButtons(){
         playButton.addActionListener(e -> {
@@ -259,7 +262,7 @@ public class MainWindow {
                             canvasPanel.repaint();
                         } else {
                             ((Timer) e.getSource()).stop();
-                            System.gc();
+                            nLife.cleanup();
                             progressBar1.setValue(progressBar1.getMinimum());
                             playPressed = false;
                             playButton.setText("Play");

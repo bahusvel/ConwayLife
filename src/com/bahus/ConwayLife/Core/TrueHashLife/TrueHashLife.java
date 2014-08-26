@@ -46,4 +46,9 @@ public class TrueHashLife implements GenericLife {
         tmp = new IntBooleanArray((HashlifeAlgo)algo);
         return tmp;
     }
+
+    @Override
+    public void cleanup() {
+        tmp.cleanup();
+    }
 }

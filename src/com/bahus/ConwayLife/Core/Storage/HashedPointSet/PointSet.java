@@ -90,4 +90,9 @@ public class PointSet extends THashSet<Point> implements BitArray2D {
         bounds.ly -= GROWSIZE;
         return bounds;
     }
+
+    @Override
+    public void cleanup() {
+        System.gc();
+    }
 }

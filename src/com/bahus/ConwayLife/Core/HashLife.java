@@ -77,4 +77,9 @@ public class HashLife implements GenericLife{
         return cells;
     }
 
+    @Override
+    public void cleanup() {
+        cells.cleanup();
+    }
+
 }

@@ -47,6 +47,10 @@ public class WeightHashMap {
         return (int)(point/width + bounds.ly);
     }
 
+    public void clearPoint(long point){
+        container.remove(point);
+    }
+
     public String toString(){
         return container.toString();
     }
@@ -57,15 +61,7 @@ public class WeightHashMap {
 
     public static void main(String[] args){
         WeightHashMap gen = new WeightHashMap(new Bounds(-20, -20, 10, 10));
-        gen.inc(-5, 5);
-        gen.inc(-6,-5);
-        gen.inc(10,-20);
-        gen.inc(-5,-5);
-        System.out.println(gen.width);
-        for (long i : gen.keys()){
-            System.out.println(i + " " + gen.getX(i) + " " + gen.getY(i));
-        }
-        System.out.println();
+
     }
 
 

@@ -24,17 +24,12 @@ public class BitArrayMap implements BitArray2D{
         else container.get(y).remove(x);
     }
 
-    private RoaringBitmap getY(int y){
-        if (!container.containsKey(y)) container.put(y, new RoaringBitmap());
-        return container.get(y);
-    }
-
     public int[] yValues(){
         return container.keys();
     }
 
     public int[] xValues(int y){
-        return getY(y).toArray();
+        return container.get(y).toArray();
     }
 
     public Bounds getBounds(){
@@ -70,6 +65,11 @@ public class BitArrayMap implements BitArray2D{
 
     public void clear(){
         container.clear();
+    }
+
+    @Override
+    public void cleanup() {
+        System.gc();
     }
 
     public String toString(){

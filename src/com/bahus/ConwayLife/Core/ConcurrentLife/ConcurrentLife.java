@@ -25,6 +25,11 @@ public class ConcurrentLife implements GenericLife {
     }
 
     @Override
+    public void cleanup() {
+        cells.cleanup();
+    }
+
+    @Override
     public Bounds getBounds() {
         bounds.updateBounds(cells.getBounds());
         return bounds;

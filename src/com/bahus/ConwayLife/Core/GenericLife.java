@@ -12,4 +12,5 @@ public interface GenericLife {
     public void toggleCell(int x, int y);
     public void nextGen();
     public BitArray2D getCells();
+    public void cleanup();
 }

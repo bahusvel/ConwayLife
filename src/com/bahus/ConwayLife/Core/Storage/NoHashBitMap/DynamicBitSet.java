@@ -94,6 +94,11 @@ public class DynamicBitSet implements BitArray2D{
         matrix = new boolean[xsize][ysize];
     }
 
+    @Override
+    public void cleanup() {
+        System.gc();
+    }
+
     public boolean get(int x, int y) {
         return !(x >= matrix.length || y >= matrix[x].length) && matrix[x][y];
     }
