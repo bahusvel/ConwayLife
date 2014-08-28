@@ -77,7 +77,8 @@ public class BitSetMap implements BitArray2D {
     }
 
     public byte row5bitHash(int x, int y){
-        return container.get(y).ret5bits(x);
+        LongMappedSet checker = container.get(y);
+        return (checker != null) ? checker.ret5bits(x) : 0;
     }
 
     public Bounds getGrownBounds(){

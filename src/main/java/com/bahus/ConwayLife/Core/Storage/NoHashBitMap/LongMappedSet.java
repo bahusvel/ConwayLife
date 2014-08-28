@@ -60,12 +60,9 @@ public class LongMappedSet {
 
         if (ex<0) {
             index2 = ex/63 - 1;
-            ex *= -1;
-            ex = 63 - ex%63;
         }
         else{
             index2 = ex / 63;
-            ex %= 63;
         }
 
         byte dst = 0;
@@ -129,14 +126,22 @@ public class LongMappedSet {
 
     public static void main(String[] args) {
         LongMappedSet lms = new LongMappedSet();
+        /*
         lms.set(-60,true);
         lms.set(-61,true);
         lms.set(-62,true);
         lms.set(-63,true);
         lms.set(-64,true);
         lms.set(-65,true);
+        */
+        lms.set(3,true);
+        lms.set(2,true);
+        lms.set(1,true);
+        lms.set(0,true);
+        //lms.set(-1,true);
+        lms.set(-2,true);
 
-
+        /*
         lms.set(-30,true);
         lms.set(-31,true);
         lms.set(-32,true);
@@ -146,8 +151,9 @@ public class LongMappedSet {
         lms.set(62,true);
         lms.set(63,true);
         lms.set(64,true);
+        */
 
-        System.out.println(lms.ret5bits(-62));
+        System.out.println(lms.ret5bits(1));
 
 
         for (int i : lms.returnValues()){
