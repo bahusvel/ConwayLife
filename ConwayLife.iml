@@ -16,6 +16,8 @@
     <orderEntry type="library" name="com.carrotsearch:hppc:0.6.0" level="project" />
     <orderEntry type="library" name="quaqua" level="project" />
     <orderEntry type="library" name="junit:junit:4.11" level="project" />
+    <orderEntry type="library" name="org.openjdk.jmh:jmh-core:0.7.2" level="project" />
+    <orderEntry type="library" name="org.openjdk.jmh:jmh-generator-annprocess:0.9.7" level="project" />
   </component>
 </module>
 

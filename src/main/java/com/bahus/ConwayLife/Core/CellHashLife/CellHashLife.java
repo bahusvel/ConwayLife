@@ -34,44 +34,32 @@ public class CellHashLife implements GenericLife {
     public void toggleCell(int x, int y) {
         if(cells.get(x,y)) cells.set(x,y,false);
         else cells.set(x,y,true);
-        //System.out.println(x+" "+y);
     }
 
     @Override
     public void nextGen() {
         for(int y : ccells.yValues()){
             for (int x : ccells.xValues(y)) {
+                    byte[] hy = ccells.hashField(x, y);
 
-                byte[] hy = new byte[5];
+                    for (int x1 = -1; x1 <= 1; x1++) {
+                        for (int y1 = -1; y1 <= 1; y1++) {
+                            short hash = 0;
 
-                hy[0] = ccells.row5bitHash(x,y-2);
-                hy[1] = ccells.row5bitHash(x,y-1);
-                hy[2] = ccells.row5bitHash(x,y);
-                hy[3] = ccells.row5bitHash(x,y+1);
-                hy[4] = ccells.row5bitHash(x,y+2);
+                            hash |= ((hy[y1 + 1] >> (1 + x1)) & 7) << 6;
+                            hash |= ((hy[y1 + 2] >> (1 + x1)) & 7) << 3;
+                            hash |= ((hy[y1 + 3] >> (1 + x1)) & 7);
 
-                for (int x1 = -1; x1 <= 1; x1++) {
-                    for (int y1 = -1; y1 <= 1; y1++) {
-                        short hash = 0;
+                            int res = generator.cellHashes.get(hash);
 
-                        hash |= ((hy[y1 + 1] >> (1 + x1)) & 7) << 6;
-                        hash |= ((hy[y1 + 2] >> (1 + x1)) & 7) << 3;
-                        hash |= ((hy[y1 + 3] >> (1 + x1)) & 7);
+                            if (res == 3) ncells.set(x + x1, y + y1, false);
+                            else if (res == 1) ncells.set(x + x1, y + y1, true);
+                            else if (ccells.get(x + x1, y + y1)) ncells.set(x + x1, y + y1, true);
 
-                        switch ((int) generator.cellHashes.get(hash)) {
-                            case 3:
-                                ncells.set(x + x1, y + y1, false);
-                                break;
-                            case 1:
-                                ncells.set(x + x1, y + y1, true);
-                                break;
-                            case 0:
-                                ncells.set(x + x1, y + y1, ccells.get(x + x1, y + y1));
-                                break;
                         }
-
                     }
-                }
+
+
             }
         }
         ccells.clear();
