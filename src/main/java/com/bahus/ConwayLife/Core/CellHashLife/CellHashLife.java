@@ -34,32 +34,49 @@ public class CellHashLife implements GenericLife {
     public void toggleCell(int x, int y) {
         if(cells.get(x,y)) cells.set(x,y,false);
         else cells.set(x,y,true);
+        //System.out.println(x+" "+y);
+    }
+
+    private void fastXY(int x, int y){
+        // we get the 5 rows, store them in variables or array or something
+        ccells.row5bitHash(x,y-2);
+        ccells.row5bitHash(x,y-1);
+        ccells.row5bitHash(x,y);
+        ccells.row5bitHash(x,y+1);
+        ccells.row5bitHash(x,y+2);
+        // then use some binary math to manipulate this data into hashes for each cell
+        // flatten the loop and copy paste yay :)
+        // or I could also leave the loop alone and make it loop over array which would be a little more readable
+    }
+
+    private void computeXY(int x, int y){
+        // this method does add some overhead,
+        // and probably messes up the JIT a little
+        // it is only for my convenience
+        // in production, shove the method back into nextGen();
+
+        for (int x1 = x-1; x1 <= x+1; x1++) {
+            for (int y1 = y-1; y1 <= y+1; y1++) {
+                switch ((int)generator.cellHashes.get(ccells.cell2Hash(x1,y1))){
+                    case 3:
+                        ncells.set(x1,y1,false);
+                        break;
+                    case 1:
+                        ncells.set(x1,y1,true);
+                        break;
+                    case 0:
+                        ncells.set(x1,y1,ccells.get(x1,y1));
+                        break;
+                }
+            }
+        }
     }
 
     @Override
     public void nextGen() {
         for(int y : ccells.yValues()){
             for (int x : ccells.xValues(y)) {
-                    byte[] hy = ccells.hashField(x, y);
-
-                    for (int x1 = -1; x1 <= 1; x1++) {
-                        for (int y1 = -1; y1 <= 1; y1++) {
-                            short hash = 0;
-
-                            hash |= ((hy[y1 + 1] >> (1 + x1)) & 7) << 6;
-                            hash |= ((hy[y1 + 2] >> (1 + x1)) & 7) << 3;
-                            hash |= ((hy[y1 + 3] >> (1 + x1)) & 7);
-
-                            int res = generator.cellHashes.get(hash);
-
-                            if (res == 3) ncells.set(x + x1, y + y1, false);
-                            else if (res == 1) ncells.set(x + x1, y + y1, true);
-                            else if (ccells.get(x + x1, y + y1)) ncells.set(x + x1, y + y1, true);
-
-                        }
-                    }
-
-
+                computeXY(x,y);
             }
         }
         ccells.clear();

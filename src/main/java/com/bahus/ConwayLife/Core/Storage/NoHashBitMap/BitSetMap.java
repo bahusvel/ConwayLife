@@ -76,25 +76,8 @@ public class BitSetMap implements BitArray2D {
         return ret;
     }
 
-    public byte[] hashField(int x, int y){
-        byte[] hy = new byte[5];
-
-        LongMappedSet checker = container.get(y-2);
-        hy[0] = (checker != null) ? checker.ret5bits(x) : 0;
-
-        checker = container.get(y-1);
-        hy[1] = (checker != null) ? checker.ret5bits(x) : 0;
-
-        checker = container.get(y);
-        hy[2] = (checker != null) ? checker.ret5bits(x) : 0;
-
-        checker = container.get(y+1);
-        hy[3] = (checker != null) ? checker.ret5bits(x) : 0;
-
-        checker = container.get(y+2);
-        hy[4] = (checker != null) ? checker.ret5bits(x) : 0;
-
-        return hy;
+    public byte row5bitHash(int x, int y){
+        return container.get(y).ret5bits(x);
     }
 
     public Bounds getGrownBounds(){
